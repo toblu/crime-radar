@@ -1,0 +1,8 @@
+{
+  "name": "crime-alert",
+  "version": "1.0.0",
+  "description": "An app that monitors crimes in your neighborhood",
+  "scripts": {},
+  "author": "Tobias Lundell",
+  "license": "ISC"
+}
