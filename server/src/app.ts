@@ -1,17 +1,22 @@
 
 import express from 'express'
-import './models';
+import cors from 'cors';
 import {graphqlHTTP} from 'express-graphql'
 import mongoose from 'mongoose';
 import session from 'express-session';
 import passport from 'passport';
 import connectMongo from 'connect-mongo';
+import './models';
 import schema from './schema/schema';
 
 const MongoStore = connectMongo(session);
 
 // Create a new Express application
 const app = express();
+
+// Enable cross-origin requests
+// TODO: change this to only enable cors in development mode
+app.use(cors());
 
 const MONGO_URI = process.env.MONGODB_URI;
 

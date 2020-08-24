@@ -1,2 +1,6 @@
 require('dotenv').config();
-export {default} from './src/app';
+import app from './src/app';
+
+app.listen(8080, () => {
+  console.log('Server is listening on port 8080');
+});
