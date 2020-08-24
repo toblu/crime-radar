@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
 import {
   ApolloClient,
   ApolloProvider,
@@ -22,8 +21,6 @@ const client = new ApolloClient({
   }),
   link,
 });
-
-const history = createBrowserHistory();
 
 function App() {
   return (
