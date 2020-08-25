@@ -2,11 +2,12 @@ import React from "react";
 import { Route, useHistory, useLocation} from "react-router-dom";
 import { PrivateRouteComponent, PrivateWrapperComponent } from "./PrivateRoute.types";
 import { useAuth } from "../shared/hooks";
+import { LocationState } from "../shared/types/auth.types";
 
 const LOGIN_ROUTE = '/login';
 
 const PrivateComponentWrapper: PrivateWrapperComponent = ({isAuthenticated, redirectOnLogout, children}) => {
-  const history = useHistory();
+  const history = useHistory<LocationState>();
   const location = useLocation();
   const wasAuthenticated = React.useRef(isAuthenticated);
 
