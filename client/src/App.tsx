@@ -28,7 +28,6 @@ function App() {
     <div className="App">
       <Router>
         <Route exact path="/">Hello world</Route>
-        <Route path="/test">Test test</Route>
         <Route path="/login"><LoginForm /></Route>
         <Route path="/signup"><SignupForm /></Route>
         <PrivateRoute path="/profile" fallbackRoute="/"><div>Profile page</div></PrivateRoute>

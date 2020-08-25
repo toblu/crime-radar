@@ -7,8 +7,12 @@ import LOGIN from '../../graphql/mutations/login';
 import CURRENT_USER from '../../graphql/queries/currentUser';
 import { useAuth } from '../auth/shared/hooks';
 
+type LocationState = {
+  fromUrl?: string
+}
+
 const LoginForm: LoginFormComponent = () => {
-  const location = useLocation();
+  const location = useLocation<LocationState>();
   const history = useHistory();
   const redirectUrl = location.state?.fromUrl ?? '/';
 
