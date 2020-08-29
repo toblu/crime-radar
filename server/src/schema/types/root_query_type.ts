@@ -1,11 +1,13 @@
-import { GraphQLObjectType } from "graphql";
-import UserType from "./user_type";
+import { GraphQLObjectType } from 'graphql';
+import UserType from './user_type';
 import { IUser } from './../../models/user';
 import { AuthContext } from './../../services/auth.types';
 
-
-const RootQueryType = new GraphQLObjectType<Omit<IUser, 'password'>, AuthContext>({
-  name: "RootQueryType",
+const RootQueryType = new GraphQLObjectType<
+  Omit<IUser, 'password'>,
+  AuthContext
+>({
+  name: 'RootQueryType',
   fields: {
     user: {
       type: UserType,
@@ -13,7 +15,7 @@ const RootQueryType = new GraphQLObjectType<Omit<IUser, 'password'>, AuthContext
         return req.user;
       }
     }
-  },
+  }
 });
 
 export default RootQueryType;

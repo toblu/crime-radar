@@ -1,38 +1,45 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
-  createHttpLink,
-} from "@apollo/client";
+  createHttpLink
+} from '@apollo/client';
 import PrivateRoute from './components/auth/PrivateRoute';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 
-
 const link = createHttpLink({
-  uri: "/graphql",
+  uri: '/graphql'
 });
 
 const client = new ApolloClient({
   cache: new InMemoryCache({
-    dataIdFromObject: (o) => o.id as string,
+    dataIdFromObject: (o) => o.id as string
   }),
-  link,
+  link
 });
 
 function App() {
   return (
     <ApolloProvider client={client}>
-    <div className="App">
-      <Router>
-        <Route exact path="/">Hello world</Route>
-        <Route path="/login"><LoginForm /></Route>
-        <Route path="/signup"><SignupForm /></Route>
-        <PrivateRoute path="/profile" fallbackRoute="/"><div>Profile page</div></PrivateRoute>
-      </Router>
-    </div>
+      <div className="App">
+        <Router>
+          <Route exact path="/">
+            Hello world
+          </Route>
+          <Route path="/login">
+            <LoginForm />
+          </Route>
+          <Route path="/signup">
+            <SignupForm />
+          </Route>
+          <PrivateRoute path="/profile" fallbackRoute="/">
+            <div>Profile page</div>
+          </PrivateRoute>
+        </Router>
+      </div>
     </ApolloProvider>
   );
 }

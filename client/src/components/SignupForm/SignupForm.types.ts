@@ -1,1 +1,1 @@
-export type SignupFormComponent = React.FC<{}>
+export type SignupFormComponent = React.FC<{}>;

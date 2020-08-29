@@ -7,6 +7,6 @@ const CURRENT_USER = gql`
       email
     }
   }
-`
+`;
 
 export default CURRENT_USER;

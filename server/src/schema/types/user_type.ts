@@ -1,13 +1,13 @@
-import { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLScalarType } from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
 import { IUser } from './../../models/user';
 import { AuthContext } from './../../services/auth.types';
 
 const UserType = new GraphQLObjectType<Omit<IUser, 'password'>, AuthContext>({
-  name: "UserType",
+  name: 'UserType',
   fields: {
     id: { type: GraphQLID },
-    email: { type: GraphQLString },
-  },
+    email: { type: GraphQLString }
+  }
 });
 
 export default UserType;

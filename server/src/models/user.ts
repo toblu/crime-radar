@@ -1,17 +1,21 @@
 import bcrypt from 'bcrypt-nodejs';
-import mongoose, {Document} from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 export type IUser = {
   id: string;
   email: string;
   password: string;
-}
+};
 
-type ComparePasswordFn = (candidatePassword: string, cb: (err: any, isMatch: any) => void) => void
+type ComparePasswordFn = (
+  candidatePassword: string,
+  cb: (err, isMatch) => void
+) => void;
 
-export type UserDocument = Document & IUser & {
-  comparePassword: ComparePasswordFn
-}
+export type UserDocument = Document &
+  IUser & {
+    comparePassword: ComparePasswordFn;
+  };
 
 const Schema = mongoose.Schema;
 
@@ -28,13 +32,18 @@ const UserSchema = new Schema<UserDocument>({
 // derived from the salted + hashed version. See 'comparePassword' to understand
 // how this is used.
 UserSchema.pre<UserDocument>('save', function save(next) {
-  const user = this;
-  if (!user.isModified('password')) { return next(); }
+  if (!this.isModified('password')) {
+    return next();
+  }
   bcrypt.genSalt(10, (err, salt) => {
-    if (err) { return next(err); }
-    bcrypt.hash(user.password, salt, null, (err, hash) => {
-      if (err) { return next(err); }
-      user.password = hash;
+    if (err) {
+      return next(err);
+    }
+    bcrypt.hash(this.password, salt, null, (err, hash) => {
+      if (err) {
+        return next(err);
+      }
+      this.password = hash;
       next();
     });
   });
@@ -45,10 +54,14 @@ UserSchema.pre<UserDocument>('save', function save(next) {
 // 'bcrypt.compare' takes the plain text password and hashes it, then compares
 // that hashed password to the one stored in the DB.  Remember that hashing is
 // a one way process - the passwords are never compared in plain text form.
-UserSchema.methods.comparePassword = function comparePassword(this: UserDocument, candidatePassword: string, cb: (err: Error, isMatch: boolean) => void) {
+UserSchema.methods.comparePassword = function comparePassword(
+  this: UserDocument,
+  candidatePassword: string,
+  cb: (err: Error, isMatch: boolean) => void
+) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
   });
-}
+};
 
 export default mongoose.model<UserDocument>('user', UserSchema);

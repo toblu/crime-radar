@@ -1,7 +1,6 @@
-
-import express from 'express'
+import express from 'express';
 import cors from 'cors';
-import {graphqlHTTP} from 'express-graphql'
+import { graphqlHTTP } from 'express-graphql';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import passport from 'passport';
@@ -27,23 +26,25 @@ mongoose.Promise = global.Promise;
 // on success or failure
 mongoose.connect(MONGO_URI);
 mongoose.connection
-    .once('open', () => console.log('Connected to MongoDB instance.'))
-    .on('error', error => console.log('Error connecting to MongoDB:', error));
+  .once('open', () => console.log('Connected to MongoDB instance.'))
+  .on('error', (error) => console.log('Error connecting to MongoDB:', error));
 
 // Configures express to use sessions.  This places an encrypted identifier
 // on the users cookie.  When a user makes a request, this middleware examines
 // the cookie and modifies the request object to indicate which user made the request
 // The cookie itself only contains the id of a session; more data about the session
 // is stored inside of MongoDB.
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.SESSION_SECRET,
-  store: new MongoStore({
-    url: MONGO_URI,
-    autoReconnect: true
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({
+      url: MONGO_URI,
+      autoReconnect: true
+    })
   })
-}));
+);
 
 // Passport is wired into express as a middleware. When a request comes in,
 // Passport will examine the request's session (as set by the above config) and
@@ -53,10 +54,13 @@ app.use(passport.session());
 
 // Instruct Express to pass on any request made to the '/graphql' route
 // to the GraphQL instance.
-app.use('/graphql', graphqlHTTP({
-  schema,
-  graphiql: true
-}));
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true
+  })
+);
 
 // Webpack runs as a middleware.  If any request comes in for the root route ('/')
 // Webpack will respond with the output of the webpack process: an HTML file and

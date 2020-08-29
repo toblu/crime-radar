@@ -1,8 +1,8 @@
 export type User = {
-  id: string,
-  email: string
-}
+  id: string;
+  email: string;
+};
 
 export type LocationState = {
-  fromUrl?: string
-}
+  fromUrl?: string;
+};

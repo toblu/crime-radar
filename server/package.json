@@ -18,7 +18,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon -e ts  --exec \"tsc && node dist/index.js\""
+    "dev": "nodemon -e ts  --exec \"tsc && node dist/index.js\"",
+    "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "^0.0.31",
@@ -28,6 +29,10 @@
     "@types/mongoose": "^5.7.36",
     "@types/passport": "^1.0.4",
     "@types/passport-local": "^1.0.33",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.7.0",
+    "eslint-plugin-node": "^11.1.0",
     "nodemon": "^2.0.4",
     "source-map-support": "^0.5.19",
     "tsc": "^1.20150623.0",
