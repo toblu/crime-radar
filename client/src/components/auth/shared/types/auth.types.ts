@@ -3,6 +3,6 @@ export type User = {
   email: string;
 };
 
-export type LocationState = {
+export type AuthRedirectLocationState = {
   fromUrl?: string;
 };

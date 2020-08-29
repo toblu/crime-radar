@@ -9,6 +9,7 @@ import {
 import PrivateRoute from './components/auth/PrivateRoute';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import Header from './components/Header';
 
 const link = createHttpLink({
   uri: '/graphql'
@@ -26,6 +27,7 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <Router>
+          <Header />
           <Route exact path="/">
             Hello world
           </Route>

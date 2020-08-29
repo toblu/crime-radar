@@ -1,22 +1,21 @@
 import React from 'react';
-import { Route, useHistory, useLocation } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import {
   PrivateRouteComponent,
   PrivateWrapperComponent
 } from './PrivateRoute.types';
 import { useAuth } from '../shared/hooks';
-import { LocationState } from '../shared/types/auth.types';
-
-const LOGIN_ROUTE = '/login';
+import { AuthRedirectLocationState } from '../shared/types/auth.types';
+import useLogin from '../shared/hooks/useLogin';
 
 const PrivateComponentWrapper: PrivateWrapperComponent = ({
   isAuthenticated,
   redirectOnLogout,
   children
 }) => {
-  const history = useHistory<LocationState>();
-  const location = useLocation();
+  const history = useHistory<AuthRedirectLocationState>();
   const wasAuthenticated = React.useRef(isAuthenticated);
+  const [login] = useLogin();
 
   React.useEffect(() => {
     if (!isAuthenticated && wasAuthenticated.current) {
@@ -24,10 +23,10 @@ const PrivateComponentWrapper: PrivateWrapperComponent = ({
       history.push(redirectOnLogout);
     } else if (!isAuthenticated && !wasAuthenticated.current) {
       // User is logged out and was not previously authenticated, redirect to login page
-      history.push(LOGIN_ROUTE, { fromUrl: location.pathname });
+      login();
     }
     wasAuthenticated.current = isAuthenticated;
-  }, [history, isAuthenticated, location.pathname, redirectOnLogout]);
+  }, [history, isAuthenticated, login, redirectOnLogout]);
 
   return isAuthenticated ? <>{children}</> : null;
 };

@@ -6,11 +6,11 @@ import { LoginFormComponent } from './LoginForm.types';
 import LOGIN from '../../graphql/mutations/login';
 import CURRENT_USER from '../../graphql/queries/currentUser';
 import { useAuth } from '../auth/shared/hooks';
-import { LocationState } from '../auth/shared/types/auth.types';
+import { AuthRedirectLocationState } from '../auth/shared/types/auth.types';
 
 const LoginForm: LoginFormComponent = () => {
-  const location = useLocation<LocationState>();
-  const history = useHistory<LocationState>();
+  const location = useLocation<AuthRedirectLocationState>();
+  const history = useHistory<AuthRedirectLocationState>();
   const redirectUrl = location.state?.fromUrl ?? '/';
 
   const { auth } = useAuth();

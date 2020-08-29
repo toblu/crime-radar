@@ -6,11 +6,11 @@ import { SignupFormComponent } from './SignupForm.types';
 import SIGNUP from '../../graphql/mutations/signup';
 import CURRENT_USER from '../../graphql/queries/currentUser';
 import { useAuth } from '../auth/shared/hooks';
-import { LocationState } from '../auth/shared/types/auth.types';
+import { AuthRedirectLocationState } from '../auth/shared/types/auth.types';
 
 const SignupForm: SignupFormComponent = () => {
-  const location = useLocation<LocationState>();
-  const history = useHistory<LocationState>();
+  const location = useLocation<AuthRedirectLocationState>();
+  const history = useHistory<AuthRedirectLocationState>();
   const redirectUrl = location.state?.fromUrl ?? '/profile';
 
   const { auth } = useAuth();
