@@ -10,8 +10,8 @@ export default () => {
   const login = () => {
     history.push(LOGIN_ROUTE, {
       fromUrl: location.pathname
-    })
-  }
+    });
+  };
 
   return [login];
 };
