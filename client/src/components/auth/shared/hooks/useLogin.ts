@@ -8,9 +8,11 @@ export default () => {
   const location = useLocation();
 
   const login = () => {
-    history.push(LOGIN_ROUTE, {
-      fromUrl: location.pathname
-    });
+    if (location.pathname !== LOGIN_ROUTE) {
+      history.push(LOGIN_ROUTE, {
+        fromUrl: location.pathname
+      });
+    }
   };
 
   return [login];

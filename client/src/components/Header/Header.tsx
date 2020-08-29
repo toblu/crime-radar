@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Theme
-} from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+import { AppBar, Toolbar, IconButton, Theme, Link } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { HeaderComponent } from './Header.types';
 import { useStyles } from '../shared/hooks/useStyles';
@@ -42,9 +37,16 @@ const Header: HeaderComponent = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6">
+          <Link
+            component={RouterLink}
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            underline="none"
+            to="/"
+          >
             Crime Alert
-          </Typography>
+          </Link>
           <ProfileMenu />
         </Toolbar>
       </AppBar>

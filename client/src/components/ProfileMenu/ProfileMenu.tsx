@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { Button, IconButton, Menu, MenuItem, Link } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useAuth } from '../auth/shared/hooks';
@@ -41,7 +42,12 @@ const ProfileMenu: ProfileMenuComponent = () => {
         onClose={() => setOpen(false)}
       >
         <MenuItem onClick={() => setOpen(false)}>
-          <Link href="/profile" color="inherit" underline="none">
+          <Link
+            component={RouterLink}
+            to="/profile"
+            color="inherit"
+            underline="none"
+          >
             Profil
           </Link>
         </MenuItem>
