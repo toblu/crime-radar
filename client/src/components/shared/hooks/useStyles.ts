@@ -12,3 +12,5 @@ export const useStyles = <P extends {}>(
       typeof styles === 'function' ? styles(theme, props) : styles
     )
   )(props ?? ({} as P));
+
+export default useStyles;
