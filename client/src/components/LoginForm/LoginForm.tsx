@@ -27,15 +27,25 @@ const LoginForm: LoginFormComponent = () => {
 
   const errors = error?.graphQLErrors.map((error) => error.message) ?? [];
 
-  function onLogin({ email, password }: { email: string; password: string }) {
+  async function onLogin({
+    email,
+    password
+  }: {
+    email: string;
+    password: string;
+  }) {
     console.log('Login');
     console.log({ email, password });
-    login({
-      variables: {
-        email,
-        password
-      }
-    });
+    try {
+      await login({
+        variables: {
+          email,
+          password
+        }
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return (
