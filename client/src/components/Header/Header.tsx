@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Theme, Link } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Theme,
+  Link,
+  makeStyles
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { HeaderComponent } from './Header.types';
-import { useStyles } from '../shared/hooks/useStyles';
 import ProfileMenu from '../ProfileMenu';
 
 const styles = (theme: Theme) => ({
@@ -22,8 +28,10 @@ const styles = (theme: Theme) => ({
   }
 });
 
+const useStyles = makeStyles(styles);
+
 const Header: HeaderComponent = () => {
-  const classes = useStyles(styles);
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>

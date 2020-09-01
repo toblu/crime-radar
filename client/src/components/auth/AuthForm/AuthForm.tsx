@@ -1,6 +1,28 @@
 import React, { useEffect } from 'react';
 import { AuthFormComponent } from './AuthForm.types';
 import { usePasswordCheck } from './hooks';
+import { TextField, Button, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    maxWidth: '400px',
+    maxHeight: '600px',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  rowWrapper: {
+    width: '100%',
+    flexBasis: '64px',
+    margin: '8px',
+    minHeight: '54px'
+  },
+  errors: {
+    flexBasis: '24px',
+    margin: '4px 8px'
+  }
+});
 
 const AuthForm: AuthFormComponent = ({
   onSubmit,
@@ -23,53 +45,54 @@ const AuthForm: AuthFormComponent = ({
 
   function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-
     onSubmit({ email, password });
   }
 
+  const classes = useStyles();
+
   return (
-    <div className="row">
-      <form className="col s6" onSubmit={onFormSubmit}>
-        <div className="input-field outlined">
-          <input
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input-field">
-          <input
-            name="password"
-            placeholder="Password"
+    <form className={classes.root} onSubmit={onFormSubmit}>
+      <div className={classes.rowWrapper}>
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
+      </div>
+      <div className={classes.rowWrapper}>
+        <TextField
+          label="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
+      </div>
+      {validatePassword && (
+        <div className={classes.rowWrapper}>
+          <TextField
+            label="Confirm Password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            variant="outlined"
+            fullWidth
           />
         </div>
+      )}
 
-        {validatePassword && (
-          <div>
-            <input
-              name="confirm-password"
-              placeholder="Confirm Password"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-        )}
-
-        <div className="errors">
-          {errors.map((error) => (
-            <div key={error}>{error}</div>
-          ))}
-        </div>
-        <button className="btn" onClick={onFormSubmit}>
-          Submit
-        </button>
-      </form>
-    </div>
+      <div className={classes.errors}>
+        {errors.map((error) => (
+          <div key={error}>{error}</div>
+        ))}
+      </div>
+      <Button variant="contained" color="primary" onClick={onFormSubmit}>
+        Submit
+      </Button>
+    </form>
   );
 };
 
