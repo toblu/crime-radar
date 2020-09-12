@@ -7,6 +7,7 @@ import SIGNUP from '../../graphql/mutations/signup';
 import CURRENT_USER from '../../graphql/queries/currentUser';
 import { useAuth } from '../auth/shared/hooks';
 import { AuthRedirectLocationState } from '../auth/shared/types/auth.types';
+import { Typography } from '@material-ui/core';
 
 const SignupForm: SignupFormComponent = () => {
   const location = useLocation<AuthRedirectLocationState>();
@@ -50,7 +51,7 @@ const SignupForm: SignupFormComponent = () => {
 
   return (
     <div>
-      <h3>Signup</h3>
+      <Typography variant="h4">Sign up</Typography>
       <AuthForm onSubmit={onSignup} errors={errors} validatePassword />
     </div>
   );

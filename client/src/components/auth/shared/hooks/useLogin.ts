@@ -1,5 +1,5 @@
 import { useHistory, useLocation } from 'react-router-dom';
-import { AuthRedirectLocationState } from './../types/auth.types';
+import { AuthRedirectLocationState } from '../types/auth.types';
 
 const LOGIN_ROUTE = '/login';
 

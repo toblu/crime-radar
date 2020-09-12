@@ -76,7 +76,7 @@ function signup({
   return User.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
-        throw new Error('Email in use');
+        throw new Error('Email is already in use, please provide another email');
       }
       return user.save();
     })
@@ -109,7 +109,7 @@ function login({
   return new Promise((resolve, reject) => {
     passport.authenticate('local', (err, user) => {
       if (!user) {
-        reject('Invalid credentials.');
+        reject(new Error('Invalid credentials.'));
       }
 
       req.login(user, () => resolve(user));

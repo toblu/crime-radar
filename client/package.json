@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "client",
+  "name": "@crime-alert/client",
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
@@ -20,7 +20,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "shared": "*"
   },
   "scripts": {
     "start": "react-scripts start",

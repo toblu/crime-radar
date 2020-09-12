@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "server",
+  "name": "@crime-alert/server",
   "private": true,
   "main": "dist/index.js",
   "dependencies": {

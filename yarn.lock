@@ -2887,6 +2887,11 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
+bintrees@~0.0.7:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/bintrees/-/bintrees-0.0.10.tgz#95496cf4b6ebcd04428656310197cea86bf5e94b"
+  integrity sha1-lUls9LbrzQRChlYxAZfOqGv16Us=
+
 bl@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/bl/-/bl-2.2.1.tgz#8c11a7b730655c5d56898cdc871224f40fd901d5"
@@ -3098,10 +3103,20 @@ bser@2.1.1:
   dependencies:
     node-int64 "^0.4.0"
 
+bson@0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-0.1.8.tgz#cf34fdcff081a189b589b4b3e5e9309cd6506c81"
+  integrity sha1-zzT9z/CBoYm1ibSz5ekwnNZQbIE=
+
 bson@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.5.tgz#2aaae98fcdf6750c0848b0cba1ddec3c73060a34"
   integrity sha512-kDuEzldR21lHciPQAIulLs1LZlCXdLziXI6Mb/TDkwXhb//UORJNPXgcRs2CuO4H0DcMkpfT3/ySsP3unoZjBg==
+
+bson@~0.1.5:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-0.1.9.tgz#7528f81ed770e6d630ca8c2ccdf5394a4096db14"
+  integrity sha1-dSj4Htdw5tYwyowszfU5SkCW2xQ=
 
 buffer-from@^1.0.0:
   version "1.1.1"
@@ -8057,6 +8072,13 @@ mongodb@3.6.0, mongodb@^3.1.0:
   optionalDependencies:
     saslprep "^1.0.0"
 
+mongodb@~1.2.9:
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-1.2.14.tgz#269665552066437308d0942036646e6795c3a9a3"
+  integrity sha1-JpZlVSBmQ3MI0JQgNmRuZ5XDqaM=
+  dependencies:
+    bson "0.1.8"
+
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
@@ -8254,6 +8276,11 @@ node-releases@^1.1.52, node-releases@^1.1.60:
   version "1.1.60"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.60.tgz#6948bdfce8286f0b5d0e5a88e8384e954dfe7084"
   integrity sha512-gsO4vjEdQaTusZAEebUWp2a5d7dF5DYoIpDG7WySnk7BuZDW+GPpHXoXXuYawRBr/9t5q54tirPz79kFIWg4dA==
+
+node-uuid@~1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.3.3.tgz#d3db4d7b56810d9e4032342766282af07391729b"
+  integrity sha1-09tNe1aBDZ5AMjQnZigq8HORcps=
 
 nodemon@^2.0.4:
   version "2.0.4"
@@ -10852,6 +10879,17 @@ shallow-clone@^3.0.0:
   dependencies:
     kind-of "^6.0.2"
 
+shared@*:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/shared/-/shared-0.2.0.tgz#b6d359a782cb6d20d097da957e92c8168c93eea2"
+  integrity sha1-ttNZp4LLbSDQl9qVfpLIFoyT7qI=
+  dependencies:
+    bintrees "~0.0.7"
+    bson "~0.1.5"
+    mongodb "~1.2.9"
+    node-uuid "~1.3.3"
+    underscore "~1.4.0"
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
@@ -11810,6 +11848,11 @@ undefsafe@^2.0.2:
   integrity sha512-nrXZwwXrD/T/JXeygJqdCO6NZZ1L66HrxM/Z7mIq2oPanoN0F1nLx3lwJMu6AwJY69hdixaFQOuoYsMjE5/C2A==
   dependencies:
     debug "^2.2.0"
+
+underscore@~1.4.0:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
+  integrity sha1-YaajIBBiKvoHljvzJSA88SI51gQ=
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

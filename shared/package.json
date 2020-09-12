@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "name": "@crime-alert/shared",
+  "private": true,
+  "dependencies": {},
+  "scripts": {},
+  "devDependencies": {}
+}

@@ -15,7 +15,8 @@ import ProfileMenu from '../ProfileMenu';
 const styles = (theme: Theme) => ({
   root: {
     display: 'flex',
-    width: '100%'
+    width: '100%',
+    height: '64px'
   },
   appBar: {
     flexGrow: 1
