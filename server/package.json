@@ -18,8 +18,10 @@
     "passport-local": "^1.0.0"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon -e ts  --exec \"tsc && node dist/index.js\"",
+    "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
+    "prebuild": "yarn clean",
+    "build": "tsc --build && cp \"./package.json\" ./dist/",
+    "dev": "nodemon --watch src -e ts  --exec \"yarn build && node dist/index.js\"",
     "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {

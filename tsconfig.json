@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@crime-alert/client": ["client/src"],
+      "@crime-alert/server": ["server/src"],
+      "@crime-alert/shared": ["shared/src"],
+      "@crime-alert/sync-events-sls": ["sync-events-sls/src"]
+    }
+  }
+}

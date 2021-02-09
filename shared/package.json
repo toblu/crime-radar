@@ -2,7 +2,12 @@
   "version": "0.1.0",
   "name": "@crime-alert/shared",
   "private": true,
-  "dependencies": {},
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "mongoose": "^5.10.0"
+  },
   "scripts": {},
   "devDependencies": {}
 }

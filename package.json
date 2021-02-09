@@ -14,7 +14,9 @@
   "license": "ISC",
   "workspaces": [
     "client",
-    "server"
+    "server",
+    "shared",
+    "sync-events-sls"
   ],
   "devDependencies": {
     "concurrently": "^5.3.0",
@@ -22,7 +24,8 @@
     "eslint-config-prettier": "^6.11.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.13",
-    "prettier": "2.1.1"
+    "prettier": "2.1.1",
+    "source-map-support": "^0.5.19"
   },
   "lint-staged": {
     "{client/src/*,server/src/*}": [

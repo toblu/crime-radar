@@ -1,11 +1,15 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,
+    "sourceMap": true,
     "module": "commonjs",
     "esModuleInterop": true,
-    "target": "ES2020",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist"
+    "rootDir": "./src/",
+    "outDir": "./dist"
   },
-  "lib": ["esNext"]
+  "lib": ["esNext"],
+  "include": ["src/**/*"],
+  "references": [{ "path": "../shared" }]
 }
