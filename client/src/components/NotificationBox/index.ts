@@ -1,1 +1,1 @@
-export {default} from './NotificationBox';
+export { default } from './NotificationBox';

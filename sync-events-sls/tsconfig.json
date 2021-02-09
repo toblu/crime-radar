@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "composite": true,
+    "moduleResolution": "node",
+    "lib": ["es2015"],
+    "outDir": ".build",
+    "rootDir": "./"
+  },
+  "references": [{ "path": "../shared" }],
+  "include": ["**/*.ts"]
+}
