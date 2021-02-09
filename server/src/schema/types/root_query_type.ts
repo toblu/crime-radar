@@ -1,7 +1,7 @@
 import { GraphQLObjectType } from 'graphql';
 import UserType from './user_type';
-import { IUser } from './../../models/user';
-import { AuthContext } from './../../services/auth.types';
+import { AuthContext } from './../../services/auth/auth.types';
+import { IUser } from '@crime-alert/shared/dist/models/user';
 
 const RootQueryType = new GraphQLObjectType<
   Omit<IUser, 'password'>,

@@ -1,8 +1,8 @@
-import { AuthContext } from './../services/auth.types';
-import { IUser } from './../models/user';
+import { AuthContext } from './../services/auth/auth.types';
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import AuthService from '../services/auth';
 import UserType from './types/user_type';
+import { IUser } from '@crime-alert/shared/dist/models/user';
 
 const mutation = new GraphQLObjectType<IUser, AuthContext>({
   name: 'Mutation',

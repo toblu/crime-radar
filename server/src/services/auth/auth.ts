@@ -1,10 +1,8 @@
-import mongoose from 'mongoose';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { AuthContext } from './auth.types';
-import { IUser, UserDocument } from './../models/user';
-
-const User = mongoose.model<UserDocument>('user');
+import { UserModel } from '@crime-alert/shared';
+import { IUser } from '@crime-alert/shared/dist/models/user';
 
 // SerializeUser is used to provide some identifying token that can be saved
 // in the users session.  We traditionally use the 'ID' for this.
@@ -15,7 +13,7 @@ passport.serializeUser<IUser, string>((user, done) => {
 // The counterpart of 'serializeUser'.  Given only a user's ID, we must return
 // the user object.  This object is placed on 'req.user'.
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
+  UserModel.findById(id, (err, user) => {
     done(err, user);
   });
 });
@@ -30,7 +28,7 @@ passport.deserializeUser((id, done) => {
 // This string is provided back to the GraphQL client.
 passport.use(
   new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-    User.findOne({ email: email.toLowerCase() }, (err, user) => {
+    UserModel.findOne({ email: email.toLowerCase() }, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -68,15 +66,17 @@ function signup({
   password: string;
   req: AuthContext;
 }): Promise<IUser> {
-  const user = new User({ email, password });
+  const user = new UserModel({ email, password });
   if (!email || !password) {
     throw new Error('You must provide an email and password.');
   }
 
-  return User.findOne({ email })
+  return UserModel.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
-        throw new Error('Email is already in use, please provide another email');
+        throw new Error(
+          'Email is already in use, please provide another email'
+        );
       }
       return user.save();
     })

@@ -3,10 +3,7 @@ import { AuthFormComponent } from './AuthForm.types';
 import { TextField, Button, makeStyles } from '@material-ui/core';
 import { useForm } from '../../shared/hooks/useForm';
 import NotificationBox from '../../NotificationBox';
-import {
-  emailRegexp,
-  passwordRegexp
-} from '@crime-alert/shared/src/validation';
+import { emailRegexp, passwordRegexp } from '@crime-alert/shared';
 
 const useStyles = makeStyles({
   root: {

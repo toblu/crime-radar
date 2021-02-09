@@ -1,4 +1,4 @@
-import { IUser } from './../models/user';
+import { IUser } from '@crime-alert/shared/dist/models/user';
 
 export interface AuthContext extends Request {
   user?: IUser;

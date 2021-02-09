@@ -9,7 +9,7 @@ export type IUser = {
 
 type ComparePasswordFn = (
   candidatePassword: string,
-  cb: (err, isMatch) => void
+  cb: (err: any, isMatch: any) => void
 ) => void;
 
 export type UserDocument = Document &
