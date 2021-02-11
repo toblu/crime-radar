@@ -1,9 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {EventModel} from '@crime-alert/shared';
+import { EventModel } from '@crime-alert/shared';
 import { IEvent } from '@crime-alert/shared/dist/models/event';
 import fetch from 'node-fetch';
 import * as _ from 'lodash';
+import { filter } from 'lodash';
 
 const version = require('./package.json').version;
 
@@ -22,7 +23,7 @@ mongoose.connection
   .on('error', (error) => console.log('Error connecting to MongoDB:', error));
 
 app.get('/', async function (req, res) {
-  console.log('Fetching events');
+  console.log('Initializing events sync');
 
   const response = await fetch(API_URL, {
     headers: {
@@ -31,49 +32,48 @@ app.get('/', async function (req, res) {
   });
   const events = (await response.json()) as IEvent[];
 
+  let eventsAdded = 0;
+  let eventsUpdated = 0;
+
   for (const event of events) {
+    const { id, ...rest } = event;
     try {
-      console.log('Mapping event', JSON.stringify(event, null, 2));
       let isExistingEvent = false;
       try {
         isExistingEvent = await EventModel.exists({
-          remoteId: event.id
+          remoteId: id
         });
-        console.log('isExistingEvent:', isExistingEvent);
       } catch (e) {
-        console.log('Failed existing event lookup');
         console.error(e);
       }
 
       if (!isExistingEvent) {
-        const { id, ...rest } = event;
-        console.log('Adding new event to DB');
         EventModel.create({ remoteId: id, ...rest });
-        continue;
-      }
+        eventsAdded++;
+      } else {
+        const storedEvent = await EventModel.findOne({
+          remoteId: event.id
+        }).lean<IEvent>();
 
-      const storedEvent = await EventModel.findOne({ remoteId: event.id }).lean<
-        IEvent
-      >();
-
-      if (
-        storedEvent?.summary !== event.summary ||
-        storedEvent?.name !== event.name
-      ) {
-        console.log('Updating existing event');
-        await EventModel.updateOne(
-          { _id: event.id },
-          { summary: event.summary, name: event.name }
-        );
+        if (
+          storedEvent?.summary !== event.summary ||
+          storedEvent?.name !== event.name
+        ) {
+          await EventModel.updateOne(
+            { _id: event.id },
+            { summary: event.summary, name: event.name }
+          );
+          eventsUpdated++;
+        }
       }
-      continue;
     } catch (e) {
       console.error(e);
     }
   }
 
   res.json({
-    result: 'DB updated'
+    result: `DB synced!\n${eventsAdded} events added, ${eventsUpdated} events updated.
+    `
   });
   return;
 });

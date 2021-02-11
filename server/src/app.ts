@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import passport from 'passport';
 import connectMongo from 'connect-mongo';
-import schema from './schema/schema';
+import schema from './graphql/schema/schema';
 
 const MongoStore = connectMongo(session);
 

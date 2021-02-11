@@ -5,9 +5,9 @@ import { AuthContext } from '../../services/auth/auth.types';
 const LocationType = new GraphQLObjectType<IEvent['location'], AuthContext>({
   name: 'LocationType',
   fields: () => ({
-    name: {type: GraphQLString},
-    gps: {type: GraphQLString}
+    name: { type: GraphQLString },
+    gps: { type: GraphQLString }
   })
-})
+});
 
-export default LocationType
+export default LocationType;

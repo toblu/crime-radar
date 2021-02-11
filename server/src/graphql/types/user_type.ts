@@ -1,6 +1,6 @@
 import { IUser } from '@crime-alert/shared/dist/models/user';
 import { GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
-import { AuthContext } from './../../services/auth/auth.types';
+import { AuthContext } from '../../services/auth/auth.types';
 
 const UserType = new GraphQLObjectType<Omit<IUser, 'password'>, AuthContext>({
   name: 'UserType',
