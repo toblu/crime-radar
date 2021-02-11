@@ -21,7 +21,7 @@ export const eventsQuery = {
     type: { type: new GraphQLList(GraphQLString) },
     from: { type: GraphQLString },
     to: { type: GraphQLString },
-    location: { type: GraphQLString }
+    location: { type: new GraphQLList(GraphQLString) }
   },
   resolve: eventsResolve
 };
