@@ -28,10 +28,10 @@
     "source-map-support": "^0.5.19"
   },
   "lint-staged": {
-    "{client/src/*,server/src/*}": [
+    "{client/src/*,server/src/*,shared/src/*,sync-events-sls/*}": [
       "yarn prettier"
     ],
-    "{client/src,server/src}/**/*.{js,jsx,ts,tsx}": [
+    "{client/src,server/src,shared/src,sync-events-sls}/**/*.{js,jsx,ts,tsx}": [
       "yarn lint --fix"
     ]
   },
