@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { CURRENT_USER } from '../../../../graphql/queries';
+import { CURRENT_USER } from '../../../graphql/queries';
 import { User } from '../types/auth.types';
 
 export const useAuth = () => {

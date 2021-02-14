@@ -1,1 +1,1 @@
-export { default } from './NotificationBox';
+export { NotificationBoxView as NotificationBox } from './NotificationBox.view';

@@ -1,9 +1,7 @@
 import React from 'react';
-import { AuthFormComponent } from './AuthForm.types';
-import { TextField, Button, makeStyles } from '@material-ui/core';
-import { useForm } from '../../shared/hooks/useForm';
-import NotificationBox from '../../NotificationBox';
-import { emailRegexp, passwordRegexp } from '@crime-alert/shared';
+import { makeStyles, TextField, Button } from '@material-ui/core';
+import { NotificationBox } from '../../NotificationBox';
+import { AuthFormViewComponent } from './AuthForm.types';
 
 const useStyles = makeStyles({
   root: {
@@ -25,60 +23,24 @@ const useStyles = makeStyles({
   }
 });
 
-const validate = (validatePassword: boolean) => ({
+export const AuthFormView: AuthFormViewComponent = ({
   email,
   password,
-  confirmPassword
-}: {
-  [key: string]: string;
-}) => {
-  const errors: { [key: string]: string } = {};
-
-  if (!email) {
-    errors['email'] = '';
-  } else if (!email.match(emailRegexp)) {
-    errors['email'] = validatePassword
-      ? 'Please provide a valid email adress'
-      : '';
-  }
-
-  if (!password) {
-    errors['password'] = '';
-  } else if (validatePassword && !password.match(passwordRegexp)) {
-    errors['password'] = 'Password does not meet complexity requirement';
-  }
-
-  if (validatePassword) {
-    if (!confirmPassword) {
-      errors['confirmPassword'] = '';
-    } else if (password && confirmPassword !== password) {
-      errors['confirmPassword'] = 'Passwords do not match';
-    }
-  }
-
-  return errors;
-};
-
-const AuthForm: AuthFormComponent = ({
+  confirmPassword,
+  onFieldChange,
   onSubmit,
-  validatePassword = false,
-  errors = []
+  errorFields,
+  errorMessages,
+  validatePassword,
+  errors,
+  isValid
 }) => {
-  const {
-    isValid,
-    values: { email, password, confirmPassword },
-    errorFields,
-    errorMessages: validationErrors,
-    handleChange,
-    handleSubmit
-  } = useForm(() => onSubmit({ email, password }), validate(validatePassword));
+  const classes = useStyles();
 
   function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    onSubmit({ email, password });
+    onSubmit();
   }
-
-  const classes = useStyles();
 
   return (
     <form className={classes.root} onSubmit={onFormSubmit}>
@@ -87,11 +49,11 @@ const AuthForm: AuthFormComponent = ({
           required
           label="Email"
           name="email"
-          onChange={handleChange}
+          onChange={onFieldChange}
           variant="outlined"
           fullWidth
           error={email ? errorFields.email : false}
-          helperText={email && errorFields.email && validationErrors['email']}
+          helperText={email && errorFields.email && errorMessages.email}
         />
       </div>
       <div className={classes.rowWrapper}>
@@ -100,12 +62,12 @@ const AuthForm: AuthFormComponent = ({
           label="Password"
           name="password"
           type="password"
-          onChange={handleChange}
+          onChange={onFieldChange}
           variant="outlined"
           fullWidth
           error={password ? errorFields.password : false}
           helperText={
-            password && errorFields.password && validationErrors['password']
+            password && errorFields.password && errorMessages.password
           }
         />
       </div>
@@ -116,14 +78,14 @@ const AuthForm: AuthFormComponent = ({
             label="Confirm Password"
             name="confirmPassword"
             type="password"
-            onChange={handleChange}
+            onChange={onFieldChange}
             variant="outlined"
             fullWidth
             error={confirmPassword ? errorFields.confirmPassword : false}
             helperText={
               confirmPassword &&
               errorFields.confirmPassword &&
-              validationErrors['confirmPassword']
+              errorMessages.confirmPassword
             }
           />
         </div>
@@ -137,7 +99,7 @@ const AuthForm: AuthFormComponent = ({
       <Button
         variant="contained"
         color="primary"
-        onClick={handleSubmit}
+        onClick={onSubmit}
         disabled={!isValid}
       >
         Submit
@@ -145,5 +107,3 @@ const AuthForm: AuthFormComponent = ({
     </form>
   );
 };
-
-export default AuthForm;

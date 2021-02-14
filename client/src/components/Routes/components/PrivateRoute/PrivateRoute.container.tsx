@@ -4,8 +4,8 @@ import {
   PrivateRouteComponent,
   PrivateWrapperComponent
 } from './PrivateRoute.types';
-import { useAuth, useLogin } from '../shared/hooks';
-import { AuthRedirectLocationState } from '../shared/types/auth.types';
+import { useAuth, useLogin } from '../../../shared/hooks';
+import { AuthRedirectLocationState } from '../../../shared/types/auth.types';
 
 const PrivateComponentWrapper: PrivateWrapperComponent = ({
   isAuthenticated,
@@ -30,7 +30,7 @@ const PrivateComponentWrapper: PrivateWrapperComponent = ({
   return isAuthenticated ? <>{children}</> : null;
 };
 
-const PrivateRoute: PrivateRouteComponent = ({
+export const PrivateRouteContainer: PrivateRouteComponent = ({
   path,
   fallbackRoute = '/',
   children,
@@ -53,5 +53,3 @@ const PrivateRoute: PrivateRouteComponent = ({
     </Route>
   );
 };
-
-export default PrivateRoute;

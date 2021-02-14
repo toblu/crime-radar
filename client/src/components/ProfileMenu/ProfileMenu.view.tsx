@@ -1,20 +1,16 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Button, IconButton, Menu, MenuItem, Link } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Button, Link } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { useAuth } from '../auth/shared/hooks';
-import { ProfileMenuComponent } from './ProfileMenu.types';
-import { useLogin, useLogout } from '../auth/shared/hooks';
+import { ProfileMenuViewComponent } from './ProfileMenu.types';
 
-const ProfileMenu: ProfileMenuComponent = () => {
-  const { loading: authLoading, auth } = useAuth();
-  const [login] = useLogin();
-  const [logout] = useLogout();
-  const [open, setOpen] = React.useState<boolean>(false);
+export const ProfileMenuView: ProfileMenuViewComponent = ({
+  isLoggedIn,
+  onLogin,
+  onLogout
+}) => {
   const anchorEl = React.useRef(null);
-
-  if (authLoading) return null;
-  const isLoggedIn = Boolean(auth?.user);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   return isLoggedIn ? (
     <div>
@@ -52,9 +48,7 @@ const ProfileMenu: ProfileMenuComponent = () => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            // TODO: why is logout type not callable?
-            // @ts-ignore
-            logout();
+            onLogout();
             setOpen(false);
           }}
         >
@@ -63,10 +57,8 @@ const ProfileMenu: ProfileMenuComponent = () => {
       </Menu>
     </div>
   ) : (
-    <Button color="inherit" onClick={login}>
+    <Button color="inherit" onClick={onLogin}>
       Logga in
     </Button>
   );
 };
-
-export default ProfileMenu;

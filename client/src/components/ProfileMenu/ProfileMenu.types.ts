@@ -1,2 +1,8 @@
-type ProfileMenuProps = {};
-export type ProfileMenuComponent = React.FC<ProfileMenuProps>;
+type ProfileMenuViewProps = {
+  isLoggedIn: boolean;
+  onLogin: () => void;
+  onLogout: () => void;
+};
+
+export type ProfileMenuContainerComponent = React.FC<{}>;
+export type ProfileMenuViewComponent = React.FC<ProfileMenuViewProps>;

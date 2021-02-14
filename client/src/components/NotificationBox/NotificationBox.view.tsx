@@ -40,7 +40,7 @@ const messageIcons = {
   success: CheckCircleIcon
 };
 
-const NotificationBox: NotificationBoxComponent = (props) => {
+export const NotificationBoxView: NotificationBoxComponent = (props) => {
   const { level, children, closeable = true } = props;
   const [open, setOpen] = React.useState<boolean>(false);
 
@@ -72,5 +72,3 @@ const NotificationBox: NotificationBoxComponent = (props) => {
     </div>
   ) : null;
 };
-
-export default NotificationBox;

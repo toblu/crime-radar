@@ -58,8 +58,7 @@ export const useForm = (submitFn: SubmitFn, validate?: ValidateFn) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event: React.SyntheticEvent<EventTarget>) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     if (isValid) {
       submitFn();
     }

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { HeaderComponent } from './Header.types';
-import ProfileMenu from '../ProfileMenu';
+import { ProfileMenu } from '../ProfileMenu';
 
 const styles = (theme: Theme) => ({
   root: {
@@ -31,7 +31,7 @@ const styles = (theme: Theme) => ({
 
 const useStyles = makeStyles(styles);
 
-const Header: HeaderComponent = () => {
+export const HeaderView: HeaderComponent = () => {
   const classes = useStyles();
 
   return (
@@ -62,5 +62,3 @@ const Header: HeaderComponent = () => {
     </div>
   );
 };
-
-export default Header;
