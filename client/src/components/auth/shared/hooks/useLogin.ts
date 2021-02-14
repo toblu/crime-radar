@@ -3,7 +3,7 @@ import { AuthRedirectLocationState } from '../types/auth.types';
 
 const LOGIN_ROUTE = '/login';
 
-export default () => {
+export const useLogin = () => {
   const history = useHistory<AuthRedirectLocationState>();
   const location = useLocation();
 

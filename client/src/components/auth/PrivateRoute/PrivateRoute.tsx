@@ -4,9 +4,8 @@ import {
   PrivateRouteComponent,
   PrivateWrapperComponent
 } from './PrivateRoute.types';
-import { useAuth } from '../shared/hooks';
+import { useAuth, useLogin } from '../shared/hooks';
 import { AuthRedirectLocationState } from '../shared/types/auth.types';
-import useLogin from '../shared/hooks/useLogin';
 
 const PrivateComponentWrapper: PrivateWrapperComponent = ({
   isAuthenticated,

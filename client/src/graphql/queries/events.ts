@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const EVENTS_QUERY = gql`
+export const GET_EVENTS = gql`
   query GetEvents(
     $limit: Int
     $type: [String]
@@ -27,5 +27,3 @@ const EVENTS_QUERY = gql`
     }
   }
 `;
-
-export default EVENTS_QUERY;

@@ -1,11 +1,9 @@
 import { gql } from '@apollo/client';
 
-const LOCATIONS_QUERY = gql`
+export const GET_LOCATIONS = gql`
   query GetLocations {
     locations {
       name
     }
   }
 `;
-
-export default LOCATIONS_QUERY;

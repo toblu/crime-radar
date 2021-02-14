@@ -4,8 +4,7 @@ import { Button, IconButton, Menu, MenuItem, Link } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useAuth } from '../auth/shared/hooks';
 import { ProfileMenuComponent } from './ProfileMenu.types';
-import useLogin from '../auth/shared/hooks/useLogin';
-import useLogout from '../auth/shared/hooks/useLogout';
+import { useLogin, useLogout } from '../auth/shared/hooks';
 
 const ProfileMenu: ProfileMenuComponent = () => {
   const { loading: authLoading, auth } = useAuth();

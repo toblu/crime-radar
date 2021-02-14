@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
-import CURRENT_USER from '../../../../graphql/queries/currentUser';
-import LOGOUT from '../../../../graphql/mutations/logout';
+import { CURRENT_USER } from '../../../../graphql/queries';
+import { LOGOUT } from '../../../../graphql/mutations';
 
-export default () => {
+export const useLogout = () => {
   const [logout, result] = useMutation(LOGOUT, {
     refetchQueries: [{ query: CURRENT_USER }]
   });
