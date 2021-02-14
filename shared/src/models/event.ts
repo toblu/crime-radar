@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 export type IEvent = {
   id: string;
+  remoteId: string;
   datetime: Date;
   name: string;
   summary: string;
@@ -16,7 +17,7 @@ export type IEvent = {
   };
 };
 
-export type EventDocument = mongoose.Document & IEvent & { remoteId: string };
+export type EventDocument = mongoose.Document & IEvent;
 
 const EventSchema = new Schema<EventDocument>({
   id: String,
