@@ -3,10 +3,9 @@ import mongoose from 'mongoose';
 import { EventModel } from '@crime-alert/shared';
 import { IEvent } from '@crime-alert/shared/dist/models/event';
 import fetch from 'node-fetch';
-import * as _ from 'lodash';
-import { filter } from 'lodash';
 
-const version = require('./package.json').version;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = require('../package.json').version;
 
 // Create a new Express application
 const app = express();
@@ -19,8 +18,12 @@ mongoose.Promise = global.Promise;
 // on success or failure
 mongoose.connect(MONGODB_URI);
 mongoose.connection
-  .once('open', () => console.log('Connected to MongoDB instance.'))
-  .on('error', (error) => console.log('Error connecting to MongoDB:', error));
+  .once('open', () => {
+    console.log('Connected to MongoDB instance.');
+  })
+  .on('error', (error) => {
+    console.log('Error connecting to MongoDB:', error);
+  });
 
 app.get('/', async function (req, res) {
   console.log('Initializing events sync');
@@ -30,12 +33,13 @@ app.get('/', async function (req, res) {
       'User-Agent': `crime-alert/${version} (Serverless; AWS)`
     }
   });
-  const events = (await response.json()) as IEvent[];
+
+  const events: Omit<IEvent, 'remoteId'>[] = await response.json();
 
   let eventsAdded = 0;
   let eventsUpdated = 0;
 
-  for (const event of events) {
+  for (const event of events.slice(0, 100)) {
     const { id, ...rest } = event;
     try {
       let isExistingEvent = false;
@@ -48,34 +52,37 @@ app.get('/', async function (req, res) {
       }
 
       if (!isExistingEvent) {
-        EventModel.create({ remoteId: id, ...rest });
+        await EventModel.create({ remoteId: id, ...rest });
         eventsAdded++;
       } else {
         const storedEvent = await EventModel.findOne({
           remoteId: event.id
-        }).lean<IEvent>();
+        })
+          .lean<IEvent>()
+          .exec();
 
         if (
           storedEvent?.summary !== event.summary ||
           storedEvent?.name !== event.name
         ) {
           await EventModel.updateOne(
-            { _id: event.id },
+            { remoteId: storedEvent.remoteId },
             { summary: event.summary, name: event.name }
-          );
+          ).exec();
           eventsUpdated++;
         }
       }
     } catch (e) {
       console.error(e);
+      return res.status(500).send(e);
     }
   }
 
-  res.json({
-    result: `DB synced!\n${eventsAdded} events added, ${eventsUpdated} events updated.
-    `
-  });
-  return;
+  console.log(
+    `DB synced!\n${eventsAdded} events added, ${eventsUpdated} events updated.`
+  );
+
+  return res.status(200).send({ eventsAdded, eventsUpdated });
 });
 
 export default app;

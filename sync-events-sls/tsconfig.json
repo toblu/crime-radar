@@ -6,10 +6,7 @@
     "esModuleInterop": true,
     "composite": true,
     "moduleResolution": "node",
-    "lib": ["es2015"],
-    "outDir": ".build",
-    "rootDir": "./"
+    "lib": ["es2015"]
   },
-  "references": [{ "path": "../shared" }],
-  "include": ["**/*.ts"]
+  "references": [{ "path": "../shared" }]
 }
