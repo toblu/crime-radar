@@ -1,36 +1,36 @@
 service: sync-events-sls
 package:
-  individually: true
+    individually: true
 app: crime-alert
 
 frameworkVersion: '2'
 
 plugins:
-  - serverless-webpack
-  - serverless-dotenv-plugin
-  - serverless-plugin-monorepo
-  - serverless-offline
+    - serverless-webpack
+    - serverless-dotenv-plugin
+    - serverless-plugin-monorepo
+    - serverless-offline
 
 provider:
-  name: aws
-  runtime: nodejs12.x
-  profile: crime-alert
-  region: eu-north-1
+    name: aws
+    runtime: nodejs12.x
+    profile: crime-alert
+    region: eu-north-1
 
 functions:
-  run:
-    handler: src/handler.run
-    timeout: 120
-    events:
-      - schedule: rate(1 hour)
-      - http: GET /
+    run:
+        handler: src/handler.run
+        timeout: 120
+        events:
+            - schedule: rate(1 hour)
+            - http: GET /
 
 custom:
-  dotenv:
-    exclude:
-      - AWS_SECRET_ACCESS_KEY
-      - AWS_ACCESS_KEY_ID
-  webpack:
-    webpackConfig: 'webpack.config.js'
-    packager: 'yarn'
-    includeModules: true
+    dotenv:
+        exclude:
+            - AWS_SECRET_ACCESS_KEY
+            - AWS_ACCESS_KEY_ID
+    webpack:
+        webpackConfig: 'webpack.config.js'
+        packager: 'yarn'
+        includeModules: true

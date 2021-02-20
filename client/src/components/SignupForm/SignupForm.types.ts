@@ -1,12 +1,12 @@
 type SignupFormViewProps = {
-  onSignup: ({
-    email,
-    password
-  }: {
-    email: string;
-    password: string;
-  }) => Promise<void>;
-  errors: string[];
+    onSignup: ({
+        email,
+        password
+    }: {
+        email: string;
+        password: string;
+    }) => Promise<void>;
+    errors: string[];
 };
 
 export type SignupFormContainerComponent = React.FC<{}>;

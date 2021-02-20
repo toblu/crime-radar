@@ -1,12 +1,12 @@
 {
-  "extends": "../tsconfig.base.json",
-  "compilerOptions": {
-    "preserveConstEnums": true,
-    "allowJs": true,
-    "esModuleInterop": true,
-    "composite": true,
-    "moduleResolution": "node",
-    "lib": ["es2015"]
-  },
-  "references": [{ "path": "../shared" }]
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "preserveConstEnums": true,
+        "allowJs": true,
+        "esModuleInterop": true,
+        "composite": true,
+        "moduleResolution": "node",
+        "lib": ["es2015"]
+    },
+    "references": [{ "path": "../shared" }]
 }

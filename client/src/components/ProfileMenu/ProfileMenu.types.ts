@@ -1,7 +1,7 @@
 type ProfileMenuViewProps = {
-  isLoggedIn: boolean;
-  onLogin: () => void;
-  onLogout: () => void;
+    isLoggedIn: boolean;
+    onLogin: () => void;
+    onLogout: () => void;
 };
 
 export type ProfileMenuContainerComponent = React.FC<{}>;

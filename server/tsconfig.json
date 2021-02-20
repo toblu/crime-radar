@@ -1,15 +1,15 @@
 {
-  "extends": "../tsconfig.base.json",
-  "compilerOptions": {
-    "composite": true,
-    "sourceMap": true,
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "rootDir": "./src/",
-    "outDir": "./dist"
-  },
-  "lib": ["esNext"],
-  "include": ["src/**/*"],
-  "references": [{ "path": "../shared" }]
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "composite": true,
+        "sourceMap": true,
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "rootDir": "./src/",
+        "outDir": "./dist"
+    },
+    "lib": ["esNext"],
+    "include": ["src/**/*"],
+    "references": [{ "path": "../shared" }]
 }

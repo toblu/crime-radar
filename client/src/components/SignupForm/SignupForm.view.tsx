@@ -4,11 +4,11 @@ import { AuthForm } from '../shared';
 import { SignupFormViewComponent } from './SignupForm.types';
 
 export const SignupFormView: SignupFormViewComponent = ({
-  onSignup,
-  errors
+    onSignup,
+    errors
 }) => (
-  <div>
-    <Typography variant="h4">Sign up</Typography>
-    <AuthForm onSubmit={onSignup} errors={errors} validatePassword />
-  </div>
+    <div>
+        <Typography variant="h4">Sign up</Typography>
+        <AuthForm onSubmit={onSignup} errors={errors} validatePassword />
+    </div>
 );

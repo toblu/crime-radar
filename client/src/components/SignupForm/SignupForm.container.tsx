@@ -7,32 +7,32 @@ import { SignupFormView } from './SignupForm.view';
 import { useRedirectAfterAuth } from '../shared/hooks';
 
 export const SignupFormContainer: SignupFormContainerComponent = () => {
-  const [signup, { error }] = useMutation(SIGNUP, {
-    refetchQueries: [{ query: CURRENT_USER }]
-  });
+    const [signup, { error }] = useMutation(SIGNUP, {
+        refetchQueries: [{ query: CURRENT_USER }]
+    });
 
-  useRedirectAfterAuth('/profile');
+    useRedirectAfterAuth('/profile');
 
-  const errors = error?.graphQLErrors.map((error) => error.message) ?? [];
+    const errors = error?.graphQLErrors.map((error) => error.message) ?? [];
 
-  async function onSignup({
-    email,
-    password
-  }: {
-    email: string;
-    password: string;
-  }) {
-    try {
-      await signup({
-        variables: {
-          email,
-          password
+    async function onSignup({
+        email,
+        password
+    }: {
+        email: string;
+        password: string;
+    }) {
+        try {
+            await signup({
+                variables: {
+                    email,
+                    password
+                }
+            });
+        } catch (e) {
+            console.error(e);
         }
-      });
-    } catch (e) {
-      console.error(e);
     }
-  }
 
-  return <SignupFormView onSignup={onSignup} errors={errors} />;
+    return <SignupFormView onSignup={onSignup} errors={errors} />;
 };

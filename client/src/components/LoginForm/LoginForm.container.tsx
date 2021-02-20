@@ -7,32 +7,32 @@ import { useRedirectAfterAuth } from '../shared/hooks';
 import { LoginFormView } from './LoginForm.view';
 
 export const LoginFormContainer: LoginFormContainerComponent = () => {
-  useRedirectAfterAuth('/');
+    useRedirectAfterAuth('/');
 
-  const [login, { error }] = useMutation(LOGIN, {
-    refetchQueries: [{ query: CURRENT_USER }]
-  });
+    const [login, { error }] = useMutation(LOGIN, {
+        refetchQueries: [{ query: CURRENT_USER }]
+    });
 
-  const errors = error?.graphQLErrors.map((error) => error.message) ?? [];
+    const errors = error?.graphQLErrors.map((error) => error.message) ?? [];
 
-  async function onLogin({
-    email,
-    password
-  }: {
-    email: string;
-    password: string;
-  }) {
-    try {
-      await login({
-        variables: {
-          email,
-          password
+    async function onLogin({
+        email,
+        password
+    }: {
+        email: string;
+        password: string;
+    }) {
+        try {
+            await login({
+                variables: {
+                    email,
+                    password
+                }
+            });
+        } catch (e) {
+            console.error(e);
         }
-      });
-    } catch (e) {
-      console.error(e);
     }
-  }
 
-  return <LoginFormView onSubmit={onLogin} errors={errors} />;
+    return <LoginFormView onSubmit={onLogin} errors={errors} />;
 };
