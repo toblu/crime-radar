@@ -1,13 +1,18 @@
 {
-  "version": "0.1.0",
-  "name": "@crime-alert/shared",
-  "private": true,
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "bcrypt-nodejs": "^0.0.3",
-    "mongoose": "^5.10.0"
-  },
-  "scripts": {},
-  "devDependencies": {}
+    "version": "0.1.0",
+    "name": "@crime-alert/shared",
+    "private": true,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "dependencies": {
+        "bcrypt-nodejs": "^0.0.3",
+        "mongoose": "^5.10.0"
+    },
+    "scripts": {
+        "tsc": "tsc"
+    },
+    "devDependencies": {
+        "tsc": "^1.20150623.0",
+        "typescript": "^3.9.7"
+    }
 }

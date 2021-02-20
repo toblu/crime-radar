@@ -1,16 +1,13 @@
 {
-  "extends": "../tsconfig.base.json",
-  "compilerOptions": {
-    "preserveConstEnums": true,
-    "strictNullChecks": true,
-    "allowJs": true,
-    "esModuleInterop": true,
-    "composite": true,
-    "target": "es5",
-    "moduleResolution": "node",
-    "lib": ["es2015"],
-    "outDir": "./dist",
-    "rootDir": "src"
-  },
-  "include": ["src/**/*"]
+    "compilerOptions": {
+        "composite": true,
+        "sourceMap": true,
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "rootDir": "src"
+    },
+    "lib": ["esNext"],
+    "include": ["src/"]
 }
