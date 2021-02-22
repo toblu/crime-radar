@@ -6,3 +6,4 @@ export { useLogin } from './useLogin';
 export { useLogout } from './useLogout';
 export { useEvents } from './useEvents';
 export { useEventLocations } from './useEventLocations';
+export { useEvent } from './useEvent';

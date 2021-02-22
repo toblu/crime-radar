@@ -2,8 +2,10 @@ import { IEvent } from '@crime-alert/shared/src/models/event';
 
 export type Event = Pick<
     IEvent,
-    'remoteId' | 'type' | 'summary' | 'url' | 'datetime' | 'location'
->;
+    'remoteId' | 'type' | 'summary' | 'url' | 'location'
+> & { datetime: string };
+
+export type DetailedEvent = Event & Pick<IEvent, 'content'>;
 
 export type EventFilter = Partial<{
     limit: number;

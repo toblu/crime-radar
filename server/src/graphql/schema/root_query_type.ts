@@ -1,5 +1,10 @@
 import { GraphQLObjectType } from 'graphql';
-import { eventsQuery, userQuery, locationsQuery } from './../queries';
+import {
+    eventsQuery,
+    userQuery,
+    locationsQuery,
+    eventQuery
+} from './../queries';
 import { AuthContext } from '../../services/auth/auth.types';
 import { IUser } from '@crime-alert/shared/dist/models/user';
 
@@ -11,6 +16,7 @@ const RootQueryType = new GraphQLObjectType<
     fields: {
         user: userQuery,
         events: eventsQuery,
+        event: eventQuery,
         locations: locationsQuery
     }
 });

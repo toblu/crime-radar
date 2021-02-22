@@ -9,6 +9,7 @@ export type IEvent = {
     datetime: Date;
     name: string;
     summary: string;
+    content: string;
     url: string;
     type: IEventType;
     location: {
@@ -25,6 +26,7 @@ const EventSchema = new Schema<EventDocument>({
     datetime: Date,
     name: String,
     summary: String,
+    content: String,
     url: String,
     type: String,
     location: {

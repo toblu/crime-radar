@@ -15,10 +15,10 @@ import { ProfileMenu } from '../ProfileMenu';
 const styles = (theme: Theme) => ({
     root: {
         display: 'flex',
-        width: '100%',
-        height: '64px'
+        width: '100%'
     },
     appBar: {
+        zIndex: theme.zIndex.drawer + 1,
         flexGrow: 1
     },
     menuButton: {

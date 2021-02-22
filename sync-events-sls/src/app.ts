@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { EventModel } from '@crime-alert/shared';
 import { IEvent } from '@crime-alert/shared/dist/models/event';
 import fetch from 'node-fetch';
+import { fetchEventContent } from './fetchEventContent';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require('../package.json').version;
@@ -39,7 +40,7 @@ app.get('/', async function (req, res) {
     let eventsAdded = 0;
     let eventsUpdated = 0;
 
-    for (const event of events.slice(0, 100)) {
+    for (const event of events) {
         const { id, ...rest } = event;
         try {
             let isExistingEvent = false;
@@ -51,8 +52,10 @@ app.get('/', async function (req, res) {
                 console.error(e);
             }
 
+            const content = await fetchEventContent(event.url);
+
             if (!isExistingEvent) {
-                await EventModel.create({ remoteId: id, ...rest });
+                await EventModel.create({ remoteId: id, content, ...rest });
                 eventsAdded++;
             } else {
                 const storedEvent = await EventModel.findOne({
@@ -60,14 +63,14 @@ app.get('/', async function (req, res) {
                 })
                     .lean<IEvent>()
                     .exec();
-
                 if (
                     storedEvent?.summary !== event.summary ||
-                    storedEvent?.name !== event.name
+                    storedEvent?.name !== event.name ||
+                    (content && storedEvent?.content !== content)
                 ) {
                     await EventModel.updateOne(
                         { remoteId: storedEvent.remoteId },
-                        { summary: event.summary, name: event.name }
+                        { summary: event.summary, name: event.name, content }
                     ).exec();
                     eventsUpdated++;
                 }

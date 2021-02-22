@@ -43,6 +43,11 @@ export async function getEvents(params: Params): Promise<IEvent[]> {
     return events;
 }
 
+export async function getEvent(remoteId: string): Promise<IEvent> {
+    const event = await EventModel.findOne({ remoteId }).lean<IEvent>().exec();
+    return event;
+}
+
 export async function getLocations(): Promise<IEvent['location'][]> {
     const locations = await EventModel.distinct('location.name')
         .lean<IEvent['location']>()

@@ -10,6 +10,7 @@ const EventType = new GraphQLObjectType<IEvent, AuthContext>({
         datetime: { type: GraphQLString },
         name: { type: GraphQLString },
         summary: { type: GraphQLString },
+        content: { type: GraphQLString },
         url: { type: GraphQLString },
         type: { type: GraphQLString },
         location: { type: LocationType }
