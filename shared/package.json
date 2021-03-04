@@ -9,7 +9,8 @@
         "mongoose": "^5.10.0"
     },
     "scripts": {
-        "tsc": "tsc"
+        "tsc": "tsc",
+        "lint": "eslint src/**/*.ts"
     },
     "devDependencies": {
         "tsc": "^1.20150623.0",

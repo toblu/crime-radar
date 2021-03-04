@@ -1,7 +1,7 @@
-import { IEventType } from './../../../../shared/src/constants';
-import { EventModel } from '@crime-alert/shared';
-import { EventDocument, IEvent } from '@crime-alert/shared/dist/models/event';
 import { FilterQuery } from 'mongoose';
+import { EventModel } from '@crime-alert/shared';
+import { IEventType } from '@crime-alert/shared/dist/constants';
+import { EventDocument, IEvent } from '@crime-alert/shared/dist/models/event';
 
 type Params = {
     limit?: number;
@@ -22,12 +22,18 @@ const buildEventsQuery = (params: Omit<Params, 'limit'>) => {
         query = { ...query, 'location.name': location };
     }
     if (from) {
-        query = { ...query, datetime: { $gte: new Date(from) } };
+        query = {
+            ...query,
+            datetime: { $gte: new Date(new Date(from).setHours(0, 0, 0)) }
+        };
     }
     if (to) {
         query = {
             ...query,
-            datetime: { ...query.datetime, $lte: new Date(to) }
+            datetime: {
+                ...query.datetime,
+                $lte: new Date(new Date(to).setHours(23, 59, 59))
+            }
         };
     }
     return Object.keys(query).length > 0 ? query : undefined;

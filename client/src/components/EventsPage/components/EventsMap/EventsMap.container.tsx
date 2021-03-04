@@ -5,6 +5,27 @@ import { EventsMapContainerComponent, Area } from './EventsMap.types';
 import { EventsMapView } from './EventsMap.view';
 import { useMap } from './hooks';
 
+const getClusterBounds = (bounds: Record<string, Record<string, number>>) => {
+    const [key1, key2] = Object.keys(bounds);
+    const keysWithMinMax = [key1, key2].reduce((acc, key) => {
+        const min = Math.min(...Object.values(bounds[key]));
+        const max = Math.max(...Object.values(bounds[key]));
+        return { ...acc, [key]: { min, max } };
+    }, {} as { [key: string]: { min: number; max: number } });
+
+    if (keysWithMinMax[key1].min < keysWithMinMax[key2].min) {
+        return {
+            longitude: keysWithMinMax[key1],
+            latitude: keysWithMinMax[key2]
+        };
+    } else {
+        return {
+            longitude: keysWithMinMax[key2],
+            latitude: keysWithMinMax[key1]
+        };
+    }
+};
+
 export const EventsMapContainer: EventsMapContainerComponent = ({
     events,
     initialLocation,
@@ -32,16 +53,7 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
         (cluster) => {
             // First trigger event click with empty events, since it will trigger the drawer to open and start animating (thereby giving a more responsive perception)
             onEventsClick([]);
-            const clusterBounds = {
-                latitude: {
-                    min: cluster.bounds.Wa.i,
-                    max: cluster.bounds.Wa.j
-                },
-                longitude: {
-                    min: cluster.bounds.Qa.i,
-                    max: cluster.bounds.Qa.j
-                }
-            };
+            const clusterBounds = getClusterBounds(cluster.bounds);
             const clusterCenter = {
                 lat: cluster.center.lat(),
                 lng: cluster.center.lng()

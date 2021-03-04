@@ -5,11 +5,13 @@ export type IEventType =
     | 'Arbetsplatsolycka'
     | 'Bedrägeri'
     | 'Bombhot'
-    | 'Brand'
-    | 'Brand automatlarm'
     | 'Bråk'
+    | 'Brand automatlarm'
+    | 'Brand'
     | 'Detonation'
     | 'Djur skadat/omhändertaget'
+    | 'Djur'
+    | 'Efterlyst person'
     | 'Ekobrott'
     | 'Farligt föremål, misstänkt'
     | 'Fjällräddning'
@@ -17,8 +19,11 @@ export type IEventType =
     | 'Förfalskningsbrott'
     | 'Försvunnen person'
     | 'Gränskontroll'
+    | 'Hemfridsbrott'
+    | 'Häleri'
     | 'HäleriInbrott'
     | 'Inbrott, försök'
+    | 'Inbrott'
     | 'Knivlagen'
     | 'Kontroll person/fordon'
     | 'Lagen om hundar och katter'
@@ -26,10 +31,10 @@ export type IEventType =
     | 'Larm Överfall'
     | 'Miljöbrott'
     | 'Missbruk av urkund'
-    | 'Misshandel'
     | 'Misshandel, grov'
-    | 'Mord/dråp'
+    | 'Misshandel'
     | 'Mord/dråp, försök'
+    | 'Mord/dråp'
     | 'Motorfordon, anträffat stulet'
     | 'Motorfordon, stöld'
     | 'Narkotikabrott'
@@ -37,54 +42,61 @@ export type IEventType =
     | 'Ofog barn/ungdom'
     | 'Ofredande/förargelse'
     | 'Olaga frihetsberövande'
+    | 'Olaga frihetsberövande/människorov'
     | 'Olaga hot'
+    | 'Olaga intrång'
     | 'Olaga intrång/hemfridsbrott'
     | 'Olovlig körning'
     | 'Ordningslagen'
     | 'Polisinsats/kommendering'
     | 'Rattfylleri'
-    | 'Rån'
-    | 'Rån väpnat'
     | 'Rån övrigt'
+    | 'Rån väpnat'
     | 'Rån, försök'
+    | 'Rån'
     | 'Räddningsinsats'
+    | 'Sabotage mot blåljusverksamhet'
     | 'Sammanfattning dag'
     | 'Sammanfattning dygn'
     | 'Sammanfattning eftermiddag'
     | 'Sammanfattning förmiddag'
     | 'Sammanfattning helg'
-    | 'Sammanfattning kväll'
     | 'Sammanfattning kväll och natt'
+    | 'Sammanfattning kväll'
     | 'Sammanfattning natt'
     | 'Sammanfattning vecka'
     | 'Sedlighetsbrott'
     | 'Sjukdom/olycksfall'
     | 'Sjölagen'
     | 'Skadegörelse'
-    | 'Skottlossning'
     | 'Skottlossning, misstänkt'
+    | 'Skottlossning'
+    | 'Skyddslagen'
     | 'Spridning smittsamma kemikalier'
-    | 'Stöld'
     | 'Stöld, försök'
     | 'Stöld, ringa'
+    | 'Stöld'
     | 'Stöld/inbrott'
     | 'Tillfälligt obemannat'
     | 'Trafikbrott'
     | 'Trafikhinder'
     | 'Trafikkontroll'
-    | 'Trafikolycka'
     | 'Trafikolycka, personskada'
     | 'Trafikolycka, singel'
     | 'Trafikolycka, smitning från'
     | 'Trafikolycka, vilt'
+    | 'Trafikolycka'
     | 'Uppdatering'
+    | 'Utlänningslagen'
     | 'Utlänningslagen'
     | 'Vapenlagen'
     | 'Varningslarm/haveri'
     | 'Våld/hot mot tjänsteman'
-    | 'Våldtäkt'
     | 'Våldtäkt, försök'
-    | 'Vållande till kroppsskada';
+    | 'Våldtäkt'
+    | 'Vållande till kroppsskada'
+    | 'Åldringsbrott'
+    | 'Övrigt';
 
 const eventTypes: IEventType[] = [
     'Alkohollagen',
@@ -93,11 +105,13 @@ const eventTypes: IEventType[] = [
     'Arbetsplatsolycka',
     'Bedrägeri',
     'Bombhot',
-    'Brand',
-    'Brand automatlarm',
     'Bråk',
+    'Brand automatlarm',
+    'Brand',
     'Detonation',
     'Djur skadat/omhändertaget',
+    'Djur',
+    'Efterlyst person',
     'Ekobrott',
     'Farligt föremål, misstänkt',
     'Fjällräddning',
@@ -105,8 +119,11 @@ const eventTypes: IEventType[] = [
     'Förfalskningsbrott',
     'Försvunnen person',
     'Gränskontroll',
+    'Hemfridsbrott',
+    'Häleri',
     'HäleriInbrott',
     'Inbrott, försök',
+    'Inbrott',
     'Knivlagen',
     'Kontroll person/fordon',
     'Lagen om hundar och katter',
@@ -114,10 +131,10 @@ const eventTypes: IEventType[] = [
     'Larm Överfall',
     'Miljöbrott',
     'Missbruk av urkund',
-    'Misshandel',
     'Misshandel, grov',
-    'Mord/dråp',
+    'Misshandel',
     'Mord/dråp, försök',
+    'Mord/dråp',
     'Motorfordon, anträffat stulet',
     'Motorfordon, stöld',
     'Narkotikabrott',
@@ -125,54 +142,61 @@ const eventTypes: IEventType[] = [
     'Ofog barn/ungdom',
     'Ofredande/förargelse',
     'Olaga frihetsberövande',
+    'Olaga frihetsberövande/människorov',
     'Olaga hot',
+    'Olaga intrång',
     'Olaga intrång/hemfridsbrott',
     'Olovlig körning',
     'Ordningslagen',
     'Polisinsats/kommendering',
     'Rattfylleri',
-    'Rån',
-    'Rån väpnat',
     'Rån övrigt',
+    'Rån väpnat',
     'Rån, försök',
+    'Rån',
     'Räddningsinsats',
+    'Sabotage mot blåljusverksamhet',
     'Sammanfattning dag',
     'Sammanfattning dygn',
     'Sammanfattning eftermiddag',
     'Sammanfattning förmiddag',
     'Sammanfattning helg',
-    'Sammanfattning kväll',
     'Sammanfattning kväll och natt',
+    'Sammanfattning kväll',
     'Sammanfattning natt',
     'Sammanfattning vecka',
     'Sedlighetsbrott',
     'Sjukdom/olycksfall',
     'Sjölagen',
     'Skadegörelse',
-    'Skottlossning',
     'Skottlossning, misstänkt',
+    'Skottlossning',
+    'Skyddslagen',
     'Spridning smittsamma kemikalier',
-    'Stöld',
     'Stöld, försök',
     'Stöld, ringa',
+    'Stöld',
     'Stöld/inbrott',
     'Tillfälligt obemannat',
     'Trafikbrott',
     'Trafikhinder',
     'Trafikkontroll',
-    'Trafikolycka',
     'Trafikolycka, personskada',
     'Trafikolycka, singel',
     'Trafikolycka, smitning från',
     'Trafikolycka, vilt',
+    'Trafikolycka',
     'Uppdatering',
+    'Utlänningslagen',
     'Utlänningslagen',
     'Vapenlagen',
     'Varningslarm/haveri',
     'Våld/hot mot tjänsteman',
-    'Våldtäkt',
     'Våldtäkt, försök',
-    'Vållande till kroppsskada'
+    'Våldtäkt',
+    'Vållande till kroppsskada',
+    'Åldringsbrott',
+    'Övrigt'
 ];
 
 export default {

@@ -2,6 +2,7 @@ import React from 'react';
 import { GoogleMap, MarkerClusterer, Rectangle } from '@react-google-maps/api';
 import { EventsMapViewComponent } from './EventsMap.types';
 import { EventMarker } from '../EventMarker';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 
 const mapContainerStyle = {
     flex: 1
@@ -29,8 +30,12 @@ export const EventsMapView: EventsMapViewComponent = ({
     selectedMapArea,
     showSelectedArea,
     onMapClick
-}) =>
-    isLoaded ? (
+}) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    // @ts-ignore
+    const googleMaps = window.google.maps;
+    return isLoaded ? (
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={
@@ -43,6 +48,16 @@ export const EventsMapView: EventsMapViewComponent = ({
             onUnmount={onUnmount}
             clickableIcons={false}
             onClick={onMapClick}
+            options={{
+                zoomControl: true,
+                zoomControlOptions: {
+                    position: isMobile
+                        ? googleMaps.ControlPosition.LEFT_CENTER
+                        : googleMaps.ControlPosition.RIGHT_BOTTOM
+                },
+                streetViewControl: false,
+                fullscreenControl: false
+            }}
         >
             <>
                 <Rectangle
@@ -53,6 +68,7 @@ export const EventsMapView: EventsMapViewComponent = ({
                     }}
                 />
                 <MarkerClusterer
+                    key={events.map(({ remoteId }) => remoteId).join('-')}
                     gridSize={40}
                     averageCenter
                     zoomOnClick={false}
@@ -74,3 +90,4 @@ export const EventsMapView: EventsMapViewComponent = ({
     ) : (
         <div>Loading map...</div>
     );
+};

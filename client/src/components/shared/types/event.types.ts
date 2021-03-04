@@ -11,6 +11,6 @@ export type EventFilter = Partial<{
     limit: number;
     type: Event['type'][];
     location: string | string[];
-    from: Date;
-    to: Date;
+    from: string;
+    to: string;
 }>;

@@ -32,7 +32,7 @@
             "yarn prettier"
         ],
         "{client/src,server/src,shared/src,sync-events-sls/src}/**/*.{js,jsx,ts,tsx}": [
-            "yarn lint --fix"
+            "yarn lint"
         ]
     },
     "husky": {
