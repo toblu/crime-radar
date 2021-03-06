@@ -21,14 +21,18 @@ const useStyles = makeStyles({
         justifyContent: 'flex-start'
     },
     formLabel: {
-        fontSize: 14,
+        fontSize: ({ size }: { size: 'small' | 'medium' }) =>
+            size === 'small' ? 14 : 16,
         flexWrap: 'nowrap',
         fontWeight: 'inherit'
     },
     controlLabelGroup: {
-        display: 'inline-flex',
+        display: 'flex',
+        flexDirection: ({ direction }: { direction: 'row' | 'column' }) =>
+            direction,
         flex: 1,
-        fontSize: 14,
+        fontSize: ({ size }: { size: 'small' | 'medium' }) =>
+            size === 'small' ? 14 : 16,
         justifyContent: 'space-evenly',
         margin: '0 8px'
     },
@@ -59,12 +63,13 @@ const getTimePeriodString = (value) => {
 export const TimeRangeFilterView: TimeRangeFilterViewComponent = ({
     className,
     size = 'small',
+    direction = 'row',
     timePeriod,
     customTimePeriod,
     onTimePeriodChange,
     onCustomTimePeriodChange
 }) => {
-    const classes = useStyles();
+    const classes = useStyles({ direction, size });
     const timePeriodString = getTimePeriodString(timePeriod);
     const [datePickerOpen, setDatePickerOpen] = useState(false);
 
@@ -76,7 +81,7 @@ export const TimeRangeFilterView: TimeRangeFilterViewComponent = ({
         <FormControl className={className} size={size}>
             <RadioGroup
                 classes={{ root: classes.radioGroupRoot }}
-                row
+                row={direction === 'row'}
                 value={timePeriodString}
                 onChange={(e, valueKey) => {
                     if (valueKey === 'custom') {

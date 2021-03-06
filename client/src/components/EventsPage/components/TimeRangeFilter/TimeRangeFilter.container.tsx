@@ -7,6 +7,7 @@ import { LAST_30_DAYS, LAST_7_DAYS } from './TimeRangeFilter.constants';
 export const TimeRangeFilterContainer: TimeRangeFilterContainerComponent = ({
     className,
     size,
+    direction,
     initialTimePeriod = LAST_7_DAYS,
     onTimePeriodChange
 }) => {
@@ -33,6 +34,7 @@ export const TimeRangeFilterContainer: TimeRangeFilterContainerComponent = ({
         <TimeRangeFilterView
             className={className}
             size={size}
+            direction={direction}
             timePeriod={selectedTimePeriod}
             customTimePeriod={customTimePeriod}
             onTimePeriodChange={setSelectedTimePeriod}

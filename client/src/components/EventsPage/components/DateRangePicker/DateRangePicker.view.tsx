@@ -13,13 +13,15 @@ const useStyles = makeStyles((theme) => ({
     },
     datePicker: {
         flex: 1,
-        minWidth: 50
+        minWidth: ({ size }: { size: 'small' | 'medium' }) =>
+            size === 'small' ? 50 : 64
     },
     datePickerInputRoot: {
         fontWeight: 'inherit'
     },
     datePickerInput: {
-        fontSize: 14,
+        fontSize: ({ size }: { size: 'small' | 'medium' }) =>
+            size === 'small' ? 14 : 16,
         textAlign: 'center'
     },
     splitter: {
@@ -43,7 +45,7 @@ export const DateRangePickerView: DateRangePickerViewComponent = ({
     onOpen,
     onClose
 }) => {
-    const classes = useStyles();
+    const classes = useStyles({ size });
     const [endDatePickerOpen, setEndDatePickerOpen] = useState(false);
 
     return (

@@ -21,6 +21,9 @@ const useStyles = (size: 'small' | 'medium') =>
         menuItemDense: {
             fontSize: 14,
             height: 44
+        },
+        selectMenu: {
+            whiteSpace: 'inherit'
         }
     })();
 
@@ -37,7 +40,7 @@ export const EventTypesSelectorView: EventTypesSelectorViewComponent = ({
     return (
         <FormControl className={className} size={size}>
             <Select
-                classes={{ root: classes.root }}
+                classes={{ root: classes.root, selectMenu: classes.selectMenu }}
                 labelId="type-of-event-label"
                 multiple
                 value={selectedEventTypes}
