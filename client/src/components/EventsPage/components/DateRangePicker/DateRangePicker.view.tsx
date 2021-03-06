@@ -5,14 +5,15 @@ import DateFnsUtils from '@date-io/date-fns'; // choose your lib
 import { subYears, format } from 'date-fns/esm';
 import { DateRangePickerViewComponent } from './DateRangePicker.types';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
     },
     datePicker: {
-        flexBasis: 75
+        flex: 1,
+        minWidth: 50
     },
     datePickerInputRoot: {
         fontWeight: 'inherit'
@@ -22,9 +23,10 @@ const useStyles = makeStyles({
         textAlign: 'center'
     },
     splitter: {
-        fontSize: '1.2em'
+        fontSize: '1.2em',
+        paddingBottom: 7
     }
-});
+}));
 
 const formatDate = (date) => (date ? format(date, 'd MMM') : '');
 const today = new Date();

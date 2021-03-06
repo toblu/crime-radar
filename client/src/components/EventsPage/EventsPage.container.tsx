@@ -4,10 +4,10 @@ import { IEventType } from '@crime-alert/shared/dist/constants';
 import { useEvents } from '../shared/hooks';
 import { Event } from '../shared/types/event.types';
 import { EventFilter, EventsMap } from './components';
-import { LAST_7_DAYS } from './components/EventFilter/EventFilter.constants';
 import { TimePeriod } from './components/EventFilter/EventFilter.types';
 import { EventsDrawer } from './components/EventsDrawer';
 import { useCurrentLocation } from './hooks';
+import { LAST_7_DAYS } from './components/TimeRangeFilter/TimeRangeFilter.constants';
 
 export const EventsPageContainer = () => {
     const userLocation = useCurrentLocation();

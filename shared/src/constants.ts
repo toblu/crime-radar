@@ -88,7 +88,6 @@ export type IEventType =
     | 'Trafikolycka'
     | 'Uppdatering'
     | 'Utlänningslagen'
-    | 'Utlänningslagen'
     | 'Vapenlagen'
     | 'Varningslarm/haveri'
     | 'Våld/hot mot tjänsteman'
@@ -187,7 +186,6 @@ const eventTypes: IEventType[] = [
     'Trafikolycka, vilt',
     'Trafikolycka',
     'Uppdatering',
-    'Utlänningslagen',
     'Utlänningslagen',
     'Vapenlagen',
     'Varningslarm/haveri',
