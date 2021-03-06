@@ -18,6 +18,7 @@ export type Area = {
 type EventsMapContainerProps = {
     events: Event[];
     initialLocation?: Coordinates;
+    eventsLoading: boolean;
     onEventsClick: (events: Event[]) => void;
     showSelectedArea: boolean;
     setShowSelectedArea: (showSelectedArea: boolean) => void;
@@ -30,6 +31,7 @@ type EventsMapViewProps = {
     center: Coordinates;
     onLoad: React.ComponentProps<typeof GoogleMap>['onLoad'];
     onUnmount: React.ComponentProps<typeof GoogleMap>['onUnmount'];
+    eventsLoading: boolean;
     isLoaded: boolean;
     onClusterClick: React.ComponentProps<typeof MarkerClusterer>['onClick'];
     selectedMapArea: Area | undefined;

@@ -8,6 +8,7 @@ import { TimePeriod } from './components/EventFilter/EventFilter.types';
 import { EventsDrawer } from './components/EventsDrawer';
 import { useCurrentLocation } from './hooks';
 import { LAST_7_DAYS } from './components/TimeRangeFilter/TimeRangeFilter.constants';
+import { EventsPageView } from './EventsPage.view';
 
 export const EventsPageContainer = () => {
     const userLocation = useCurrentLocation();
@@ -18,7 +19,7 @@ export const EventsPageContainer = () => {
     const [eventTypes, setEventTypes] = useState<IEventType[]>(
         constants.eventTypes
     );
-    const { events } = useEvents({
+    const { events, loading } = useEvents({
         from: timePeriod.from,
         to: timePeriod.to,
         type: eventTypes.length ? (eventTypes as IEventType[]) : undefined
@@ -44,13 +45,14 @@ export const EventsPageContainer = () => {
     }, [events]);
 
     return (
-        <>
+        <EventsPageView>
             <EventFilter
                 timePeriod={timePeriod}
                 eventTypes={eventTypes}
                 onChange={handleFilterChange}
             />
             <EventsMap
+                eventsLoading={loading}
                 initialLocation={userLocation}
                 events={events}
                 onEventsClick={handleEventsClick}
@@ -64,6 +66,6 @@ export const EventsPageContainer = () => {
                 events={eventsInSelectedArea}
                 active={showSelectedArea}
             />
-        </>
+        </EventsPageView>
     );
 };

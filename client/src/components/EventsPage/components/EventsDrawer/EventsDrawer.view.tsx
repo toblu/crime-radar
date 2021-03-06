@@ -98,7 +98,7 @@ export const EventsDrawerView: EventsDrawerViewComponent = ({
 }) => {
     const showEventDetails = !!selectedEventId;
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
     const classes = useDrawerStyles(isMobile);
     return (
         <>

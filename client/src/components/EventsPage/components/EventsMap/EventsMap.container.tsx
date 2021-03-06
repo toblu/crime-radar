@@ -28,6 +28,7 @@ const getClusterBounds = (bounds: Record<string, Record<string, number>>) => {
 
 export const EventsMapContainer: EventsMapContainerComponent = ({
     events,
+    eventsLoading,
     initialLocation,
     onEventsClick,
     showSelectedArea,
@@ -80,19 +81,18 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
         [events, onEventsClick]
     );
 
-    return isLoaded ? (
+    return (
         <EventsMapView
             isLoaded={isLoaded}
             center={location}
             onLoad={loadMap}
             onUnmount={unloadMap}
             events={events}
+            eventsLoading={eventsLoading}
             onClusterClick={handleClusterClick}
             selectedMapArea={selectedMapArea}
             showSelectedArea={showSelectedArea}
             onMapClick={() => setShowSelectedArea(false)}
         />
-    ) : (
-        <div>Loading map...</div>
     );
 };

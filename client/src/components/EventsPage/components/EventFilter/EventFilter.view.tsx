@@ -8,11 +8,9 @@ import { TimeRangeFilter } from '../TimeRangeFilter';
 
 const useStyles = makeStyles({
     root: {
-        position: 'absolute',
         width: '100%',
         padding: 0,
         zIndex: 1,
-        top: 64,
         height: 32
     },
     card: {
