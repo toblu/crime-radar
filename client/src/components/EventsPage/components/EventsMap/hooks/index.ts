@@ -1,1 +1,1 @@
-export { useMap } from './useMap';
+export { useLoadMap } from './useLoadMap';

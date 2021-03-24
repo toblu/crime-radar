@@ -37,6 +37,7 @@ type EventsMapViewProps = {
     selectedMapArea: Area | undefined;
     showSelectedArea: boolean;
     onMapClick: () => void;
+    onSearchPlaceChange: (coord: Coordinates) => void;
 };
 
 export type EventsMapViewComponent = React.FC<EventsMapViewProps>;

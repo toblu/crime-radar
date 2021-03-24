@@ -8,6 +8,7 @@ import {
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
+import { SearchField } from '../SearchField';
 
 const mapContainerStyle = {
     width: '100%',
@@ -49,7 +50,8 @@ export const EventsMapView: EventsMapViewComponent = ({
     onClusterClick,
     selectedMapArea,
     showSelectedArea,
-    onMapClick
+    onMapClick,
+    onSearchPlaceChange
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -84,10 +86,12 @@ export const EventsMapView: EventsMapViewComponent = ({
                                 : googleMaps.ControlPosition.RIGHT_BOTTOM
                         },
                         streetViewControl: false,
-                        fullscreenControl: false
+                        fullscreenControl: false,
+                        mapTypeControl: false
                     }}
                 >
-                    <>
+                    <div style={{ display: 'flex' }}>
+                        <SearchField onChange={onSearchPlaceChange} />
                         <Rectangle
                             bounds={selectedMapArea?.bounds}
                             options={{
@@ -115,7 +119,7 @@ export const EventsMapView: EventsMapViewComponent = ({
                                 ))
                             }
                         </MarkerClusterer>
-                    </>
+                    </div>
                 </GoogleMap>
             )}
         </div>

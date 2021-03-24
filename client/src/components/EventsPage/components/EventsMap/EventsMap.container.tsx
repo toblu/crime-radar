@@ -3,7 +3,9 @@ import { isWithinBounds } from '@crime-alert/shared';
 import { DEFAULT_LOCATION } from './EventsMap.constants';
 import { EventsMapContainerComponent, Area } from './EventsMap.types';
 import { EventsMapView } from './EventsMap.view';
-import { useMap } from './hooks';
+import { useLoadMap } from './hooks';
+import { Coordinates } from '../../../shared/types/location.types';
+import { MapContext } from '../../../shared';
 
 const getClusterBounds = (bounds: Record<string, Record<string, number>>) => {
     const [key1, key2] = Object.keys(bounds);
@@ -34,7 +36,7 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
     showSelectedArea,
     setShowSelectedArea
 }) => {
-    const { isLoaded, loadMap, unloadMap } = useMap();
+    const { isLoaded, loadMap, unloadMap, map } = useLoadMap();
     const [selectedLocation, setSelectedLocation] = useState(initialLocation);
     const [selectedMapArea, setSelectedMapArea] = useState<Area | null>();
 
@@ -81,18 +83,29 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
         [events, onEventsClick]
     );
 
+    const handleSearchPlaceChange = useCallback(
+        (coord: Coordinates) => {
+            map.panTo({ lat: coord.latitude, lng: coord.longitude });
+            map.setZoom(12);
+        },
+        [map]
+    );
+
     return (
-        <EventsMapView
-            isLoaded={isLoaded}
-            center={location}
-            onLoad={loadMap}
-            onUnmount={unloadMap}
-            events={events}
-            eventsLoading={eventsLoading}
-            onClusterClick={handleClusterClick}
-            selectedMapArea={selectedMapArea}
-            showSelectedArea={showSelectedArea}
-            onMapClick={() => setShowSelectedArea(false)}
-        />
+        <MapContext.Provider value={{ map, isLoaded }}>
+            <EventsMapView
+                isLoaded={isLoaded}
+                center={location}
+                onLoad={loadMap}
+                onUnmount={unloadMap}
+                events={events}
+                eventsLoading={eventsLoading}
+                onClusterClick={handleClusterClick}
+                selectedMapArea={selectedMapArea}
+                showSelectedArea={showSelectedArea}
+                onMapClick={() => setShowSelectedArea(false)}
+                onSearchPlaceChange={handleSearchPlaceChange}
+            />
+        </MapContext.Provider>
     );
 };
