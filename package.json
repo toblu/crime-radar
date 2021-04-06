@@ -8,7 +8,10 @@
         "lint": "eslint ./client/src/**/*.{ts,tsx} ./server/src/**/*.ts ./sync-events-sls/src/**/*.ts ./shared/src/**/*.ts",
         "start:client": "cd client && yarn start",
         "start:server": "cd server && yarn dev",
-        "dev": "concurrently \"yarn start:client\" \"yarn start:server\""
+        "dev": "concurrently \"yarn start:client\" \"yarn start:server\"",
+        "build:client": "cd client && yarn build",
+        "build:server": "cd server && yarn build",
+        "build": "concurrently \"yarn build:client\" \"yarn build:server\""
     },
     "author": "Tobias Lundell",
     "license": "ISC",
