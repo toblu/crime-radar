@@ -8,6 +8,7 @@ import {
 import { SearchFieldView } from './SearchField.view';
 
 const fields = ['name', 'geometry.location'];
+const types = ['(regions)'];
 const componentRestrictions = { country: 'se' };
 
 const isPrediction = (input: string | Prediction): input is Prediction =>
@@ -23,7 +24,7 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
 
     const debouncedGetQueryPredictions = useMemo(() => {
         return debounce(
-            AutoCompleteService?.getQueryPredictions.bind(AutoCompleteService),
+            AutoCompleteService?.getPlacePredictions.bind(AutoCompleteService),
             250
         );
     }, [AutoCompleteService]);
@@ -34,18 +35,16 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
                 debouncedGetQueryPredictions(
                     {
                         input,
+                        types,
                         componentRestrictions
                     },
                     (predictions) => {
                         predictions = predictions ?? [];
                         setPredictions(
                             predictions.map(
-                                ({
-                                    place_id: placeId,
-                                    structured_formatting: { main_text: name }
-                                }) => ({
+                                ({ place_id: placeId, description: name }) => ({
                                     placeId,
-                                    name
+                                    name: name.replace(', Sweden', '')
                                 })
                             )
                         );
@@ -58,6 +57,7 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
 
     const handlePlaceSelect = useCallback(
         (value: Prediction | string) => {
+            if (!value) return;
             const prediction = isPrediction(value) ? value : predictions[0];
             if (prediction) {
                 const { placeId } = prediction;
