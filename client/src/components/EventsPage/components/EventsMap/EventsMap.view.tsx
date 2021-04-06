@@ -40,6 +40,13 @@ const useStyles = makeStyles({
     }
 });
 
+const SWEDEN_BOUNDS = {
+    north: 69.5,
+    south: 55,
+    west: 10,
+    east: 24.5
+};
+
 export const EventsMapView: EventsMapViewComponent = ({
     isLoaded,
     onLoad,
@@ -87,7 +94,11 @@ export const EventsMapView: EventsMapViewComponent = ({
                         },
                         streetViewControl: false,
                         fullscreenControl: false,
-                        mapTypeControl: false
+                        mapTypeControl: false,
+                        restriction: {
+                            latLngBounds: SWEDEN_BOUNDS,
+                            strictBounds: true
+                        }
                     }}
                 >
                     <div style={{ display: 'flex' }}>
