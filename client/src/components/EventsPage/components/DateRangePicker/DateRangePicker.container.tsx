@@ -33,6 +33,7 @@ export const DateRangePickerContainer: DateRangePickerContainerComponent = ({
         } else if (startDate && endDate) {
             onChange({ startDate, endDate });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startDate, endDate]);
 
     const handleOpen = useCallback(() => {

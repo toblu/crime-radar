@@ -80,6 +80,7 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
             } = place;
             onChange({ latitude: location.lat(), longitude: location.lng() });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [place]);
 
     return (
