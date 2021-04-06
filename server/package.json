@@ -3,6 +3,9 @@
     "name": "@crime-alert/server",
     "private": true,
     "main": "dist/index.js",
+    "engines": {
+        "node": "14.x"
+    },
     "dependencies": {
         "bcrypt-nodejs": "^0.0.3",
         "connect-mongo": "^3.2.0",
@@ -21,7 +24,8 @@
         "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
         "prebuild": "yarn clean",
         "build": "tsc --build && cp \"./package.json\" ./dist/",
-        "dev": "nodemon --watch src -e ts  --exec \"yarn build && node dist/index.js\"",
+        "start": "node dist/index.js",
+        "dev": "nodemon --watch src -e ts  --exec \"yarn build && yarn start\"",
         "lint": "eslint src/**/*.ts"
     },
     "devDependencies": {
