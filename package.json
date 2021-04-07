@@ -6,13 +6,15 @@
     "scripts": {
         "prettier": "prettier --write ./client ./server ./shared ./sync-events-sls --loglevel silent",
         "lint": "eslint ./client/src/**/*.{ts,tsx} ./server/src/**/*.ts ./sync-events-sls/src/**/*.ts ./shared/src/**/*.ts",
-        "start:client": "cd client && yarn start",
-        "start:server": "cd server && yarn dev",
-        "dev": "concurrently \"yarn start:client\" \"yarn start:server\"",
+        "dev:client": "cd client && yarn dev",
+        "dev:server": "cd server && yarn dev",
+        "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
         "build:shared": "cd shared && yarn tsc",
         "build:client": "cd client && yarn build",
         "build:server": "cd server && yarn build",
-        "build": "yarn build:shared && concurrently \"yarn build:client\" \"yarn build:server\""
+        "build": "yarn build:shared && concurrently \"yarn build:client\" \"yarn build:server\"",
+        "start:server": "cd server && yarn start",
+        "heroku-postbuild": "yarn build:shared && yarn build:server"
     },
     "author": "Tobias Lundell",
     "license": "ISC",
