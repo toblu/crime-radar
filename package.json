@@ -6,7 +6,7 @@
     "scripts": {
         "prettier": "prettier --write ./client ./server ./shared ./sync-events-sls --loglevel silent",
         "lint": "eslint ./client/src/**/*.{ts,tsx} ./server/src/**/*.ts ./sync-events-sls/src/**/*.ts ./shared/src/**/*.ts",
-        "dev:client": "cd client && yarn dev",
+        "dev:client": "cd client && yarn start",
         "dev:server": "cd server && yarn dev",
         "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
         "build:shared": "cd shared && yarn tsc",

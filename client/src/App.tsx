@@ -11,7 +11,7 @@ import { Routes } from './components/Routes';
 import './App.css';
 
 const link = createHttpLink({
-    uri: '/graphql'
+    uri: process.env.REACT_APP_GRAPHQL_SERVER
 });
 
 const client = new ApolloClient({
