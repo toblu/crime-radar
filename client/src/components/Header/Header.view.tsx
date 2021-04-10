@@ -10,7 +10,9 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { HeaderComponent } from './Header.types';
-import { ProfileMenu } from '../ProfileMenu';
+// import { ProfileMenu } from '../ProfileMenu';
+
+const absolute: 'absolute' = 'absolute';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -19,6 +21,7 @@ const styles = (theme: Theme) => ({
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
+        position: absolute,
         flexGrow: 1
     },
     menuButton: {
@@ -26,6 +29,9 @@ const styles = (theme: Theme) => ({
     },
     title: {
         flexGrow: 1
+    },
+    googleTranslateMenu: {
+        margin: theme.spacing(2)
     }
 });
 
@@ -48,7 +54,7 @@ export const HeaderView: HeaderComponent = () => {
                     </IconButton>
                     <Link
                         component={RouterLink}
-                        className={classes.title}
+                        className={`notranslate ${classes.title}`}
                         variant="h6"
                         color="inherit"
                         underline="none"
@@ -56,7 +62,11 @@ export const HeaderView: HeaderComponent = () => {
                     >
                         Crime Alert
                     </Link>
-                    <ProfileMenu />
+                    <div
+                        id="google_translate_element"
+                        className={classes.googleTranslateMenu}
+                    />
+                    {/* <ProfileMenu /> */}
                 </Toolbar>
             </AppBar>
         </div>
