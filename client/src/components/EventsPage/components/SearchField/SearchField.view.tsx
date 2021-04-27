@@ -24,7 +24,6 @@ export const SearchFieldView: SearchFieldViewComponent = ({
         <Paper className={classes.root}>
             <Autocomplete
                 id={'place-search-field'}
-                autoComplete
                 options={options}
                 onInputChange={(_, value) => onInputChange(value)}
                 onChange={(_, v) => onChange(v)}

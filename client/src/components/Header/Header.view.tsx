@@ -62,10 +62,10 @@ export const HeaderView: HeaderComponent = () => {
                     >
                         Crime Alert
                     </Link>
-                    <div
+                    {/* <div
                         id="google_translate_element"
                         className={classes.googleTranslateMenu}
-                    />
+                    /> */}
                     {/* <ProfileMenu /> */}
                 </Toolbar>
             </AppBar>
