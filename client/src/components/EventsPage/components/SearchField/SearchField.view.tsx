@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { SearchFieldViewComponent } from './SearchField.types';
 import { makeStyles, Paper, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
+import { useClickOutside } from '../../../shared/hooks';
 
 const useStyles = makeStyles({
     root: {
@@ -20,9 +21,16 @@ export const SearchFieldView: SearchFieldViewComponent = ({
     options
 }) => {
     const classes = useStyles();
+    const ref = useRef<HTMLInputElement>();
+
+    useClickOutside(ref, () => {
+        ref.current?.blur();
+    });
+
     return (
         <Paper className={classes.root}>
             <Autocomplete
+                ref={ref}
                 id={'place-search-field'}
                 options={options}
                 onInputChange={(_, value) => onInputChange(value)}
