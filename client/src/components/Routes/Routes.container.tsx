@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { EventsPage } from '../EventsPage';
 import { LoginForm } from '../LoginForm';
 import { SignupForm } from '../SignupForm';
@@ -8,10 +8,7 @@ import { RoutesView } from './Routes.view';
 
 export const RoutesContainer = () => (
     <RoutesView>
-        <Route exact path="/">
-            <Redirect to="/events" />
-        </Route>
-        <Route path="/events">
+        <Route path="/" exact>
             <EventsPage />
         </Route>
         <Route path="/login">
