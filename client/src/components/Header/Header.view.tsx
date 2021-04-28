@@ -3,14 +3,14 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
-    IconButton,
     Theme,
     Link,
-    makeStyles
+    makeStyles,
+    IconButton
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { HeaderComponent } from './Header.types';
-import { ProfileMenu } from '../ProfileMenu';
+import { Logo } from './components/Logo';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -20,9 +20,6 @@ const styles = (theme: Theme) => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         flexGrow: 1
-    },
-    menuButton: {
-        marginRight: theme.spacing(2)
     },
     title: {
         flexGrow: 1
@@ -38,12 +35,7 @@ export const HeaderView: HeaderComponent = () => {
         <div className={classes.root}>
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="menu"
-                    >
+                    <IconButton edge="start" color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
                     <Link
@@ -54,7 +46,7 @@ export const HeaderView: HeaderComponent = () => {
                         underline="none"
                         to="/"
                     >
-                        Crime Alert
+                        <Logo />
                     </Link>
                     {/* <ProfileMenu /> */}
                 </Toolbar>
