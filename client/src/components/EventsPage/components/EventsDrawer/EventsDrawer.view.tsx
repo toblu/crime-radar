@@ -33,13 +33,11 @@ const useDrawerStyles = (isMobile: boolean) =>
         },
         listDrawerPaper: {
             ...basePaperStyles(isMobile),
-            width: drawerListWidth,
-            position: 'absolute'
+            width: drawerListWidth
         },
         detailsDrawerPaper: {
             ...basePaperStyles(isMobile),
             width: drawerDetailsWidth,
-            position: 'absolute',
             maxWidth: '100vw'
         }
     }))();
