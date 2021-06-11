@@ -11,7 +11,7 @@ const version = require('../package.json').version;
 // Create a new Express application
 const app = express();
 
-const { MONGODB_URI = '', API_URL = '' } = process.env;
+const { MONGODB_URI = '', API_URL = '', CONTENT_BASE_URL = '' } = process.env;
 
 mongoose.Promise = global.Promise;
 
@@ -41,7 +41,10 @@ app.get('/', async function (req, res) {
     let eventsUpdated = 0;
 
     for (const event of events) {
-        const { id, ...rest } = event;
+        const { id, url, ...rest } = event;
+
+        const contentUrl = CONTENT_BASE_URL + url;
+
         try {
             let isExistingEvent = false;
             try {
@@ -52,10 +55,15 @@ app.get('/', async function (req, res) {
                 console.error(e);
             }
 
-            const content = await fetchEventContent(event.url);
+            const content = await fetchEventContent(contentUrl);
 
             if (!isExistingEvent) {
-                await EventModel.create({ remoteId: id, content, ...rest });
+                await EventModel.create({
+                    remoteId: id,
+                    content,
+                    url: contentUrl,
+                    ...rest
+                });
                 eventsAdded++;
             } else {
                 const storedEvent = await EventModel.findOne({
@@ -66,11 +74,17 @@ app.get('/', async function (req, res) {
                 if (
                     storedEvent?.summary !== event.summary ||
                     storedEvent?.name !== event.name ||
+                    storedEvent?.url !== contentUrl ||
                     (content && storedEvent?.content !== content)
                 ) {
                     await EventModel.updateOne(
                         { remoteId: storedEvent.remoteId },
-                        { summary: event.summary, name: event.name, content }
+                        {
+                            summary: event.summary,
+                            name: event.name,
+                            content: content ? content : storedEvent.content,
+                            url: contentUrl
+                        }
                     ).exec();
                     eventsUpdated++;
                 }
