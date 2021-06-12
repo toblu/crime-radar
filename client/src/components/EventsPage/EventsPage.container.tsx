@@ -6,12 +6,10 @@ import { Event } from '../shared/types/event.types';
 import { EventFilter, EventsMap } from './components';
 import { TimePeriod } from './components/EventFilter/EventFilter.types';
 import { EventsDrawer } from './components/EventsDrawer';
-import { useCurrentLocation } from './hooks';
 import { LAST_7_DAYS } from './components/TimeRangeFilter/TimeRangeFilter.constants';
 import { EventsPageView } from './EventsPage.view';
 
 export const EventsPageContainer = () => {
-    const userLocation = useCurrentLocation();
     const [eventsInSelectedArea, setEventsInSelectedArea] = useState<Event[]>(
         []
     );
@@ -53,7 +51,6 @@ export const EventsPageContainer = () => {
             />
             <EventsMap
                 eventsLoading={loading}
-                initialLocation={userLocation}
                 events={events}
                 onEventsClick={handleEventsClick}
                 showSelectedArea={showSelectedArea}

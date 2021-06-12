@@ -1,1 +1,0 @@
-export { useCurrentLocation } from './useCurrentLocation';

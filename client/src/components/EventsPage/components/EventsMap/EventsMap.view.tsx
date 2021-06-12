@@ -9,6 +9,7 @@ import {
     useTheme
 } from '@material-ui/core';
 import { SearchField } from '../SearchField';
+import { CurrentLocationButton } from '../CurrentLocationButton';
 
 const mapContainerStyle = {
     width: '100%',
@@ -54,11 +55,14 @@ export const EventsMapView: EventsMapViewComponent = ({
     center,
     events,
     eventsLoading,
+    locationLoading,
+    locationUnavailable,
     onClusterClick,
     selectedMapArea,
     showSelectedArea,
     onMapClick,
-    onSearchPlaceChange
+    onSearchPlaceChange,
+    onCurrentLocationClick
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -130,6 +134,11 @@ export const EventsMapView: EventsMapViewComponent = ({
                                 ))
                             }
                         </MarkerClusterer>
+                        <CurrentLocationButton
+                            loading={locationLoading}
+                            locationUnavailable={locationUnavailable}
+                            onClick={onCurrentLocationClick}
+                        />
                     </div>
                 </GoogleMap>
             )}

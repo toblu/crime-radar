@@ -3,7 +3,7 @@ import { isWithinBounds } from '@crime-alert/shared';
 import { DEFAULT_LOCATION } from './EventsMap.constants';
 import { EventsMapContainerComponent, Area } from './EventsMap.types';
 import { EventsMapView } from './EventsMap.view';
-import { useLoadMap } from './hooks';
+import { useCurrentLocation, useLoadMap } from './hooks';
 import { Coordinates } from '../../../shared/types/location.types';
 import { MapContext } from '../../../shared';
 
@@ -31,26 +31,31 @@ const getClusterBounds = (bounds: Record<string, Record<string, number>>) => {
 export const EventsMapContainer: EventsMapContainerComponent = ({
     events,
     eventsLoading,
-    initialLocation,
     onEventsClick,
     showSelectedArea,
     setShowSelectedArea
 }) => {
+    const {
+        location: currentLocation,
+        loading: currentLocationLoading,
+        updateLocation: updateCurrentLocation,
+        locationUnavailable: currentLocationUnavailable
+    } = useCurrentLocation();
     const { isLoaded, loadMap, unloadMap, map } = useLoadMap();
-    const [selectedLocation, setSelectedLocation] = useState(initialLocation);
+    const [selectedLocation, setSelectedLocation] = useState<Coordinates>(
+        DEFAULT_LOCATION
+    );
     const [selectedMapArea, setSelectedMapArea] = useState<Area | null>();
 
     useEffect(() => {
-        if (!selectedLocation) setSelectedLocation(initialLocation);
-    }, [selectedLocation, initialLocation]);
+        if (currentLocation) setSelectedLocation(currentLocation);
+    }, [currentLocation]);
 
     useEffect(() => {
         if (selectedMapArea) {
             setShowSelectedArea(true);
         }
     }, [selectedMapArea, setShowSelectedArea]);
-
-    const location = selectedLocation ?? DEFAULT_LOCATION;
 
     const handleClusterClick = useCallback(
         (cluster) => {
@@ -83,28 +88,43 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
         [events, onEventsClick]
     );
 
-    const handleSearchPlaceChange = useCallback(
+    const goToLocation = useCallback(
         (coord: Coordinates) => {
             map.panTo({ lat: coord.latitude, lng: coord.longitude });
-            map.setZoom(12);
         },
         [map]
     );
+
+    const handleSearchPlaceChange = useCallback(
+        (coord: Coordinates) => {
+            goToLocation(coord);
+            map.setZoom(12);
+        },
+        [map, goToLocation]
+    );
+
+    const handleCurrentLocationClick = useCallback(() => {
+        updateCurrentLocation();
+        if (currentLocation) setSelectedLocation(currentLocation);
+    }, [currentLocation, updateCurrentLocation]);
 
     return (
         <MapContext.Provider value={{ map, isLoaded }}>
             <EventsMapView
                 isLoaded={isLoaded}
-                center={location}
+                center={selectedLocation}
                 onLoad={loadMap}
                 onUnmount={unloadMap}
                 events={events}
                 eventsLoading={eventsLoading}
+                locationLoading={currentLocationLoading}
+                locationUnavailable={currentLocationUnavailable}
                 onClusterClick={handleClusterClick}
                 selectedMapArea={selectedMapArea}
                 showSelectedArea={showSelectedArea}
                 onMapClick={() => setShowSelectedArea(false)}
                 onSearchPlaceChange={handleSearchPlaceChange}
+                onCurrentLocationClick={handleCurrentLocationClick}
             />
         </MapContext.Provider>
     );
