@@ -36,20 +36,33 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
     setShowSelectedArea
 }) => {
     const {
-        location: currentLocation,
         loading: currentLocationLoading,
-        updateLocation: updateCurrentLocation,
+        getLocation: getCurrentLocation,
         locationUnavailable: currentLocationUnavailable
     } = useCurrentLocation();
     const { isLoaded, loadMap, unloadMap, map } = useLoadMap();
-    const [selectedLocation, setSelectedLocation] = useState<Coordinates>(
-        DEFAULT_LOCATION
-    );
     const [selectedMapArea, setSelectedMapArea] = useState<Area | null>();
 
+    const goToLocation = useCallback(
+        (coord: Coordinates) => {
+            if (map) {
+                map.panTo({ lat: coord.latitude, lng: coord.longitude });
+                map.setZoom(12);
+            }
+        },
+        [map]
+    );
+
+    const goToCurrentLocation = useCallback(async () => {
+        const location = await getCurrentLocation();
+        if (location) {
+            goToLocation(location);
+        }
+    }, [goToLocation, getCurrentLocation]);
+
     useEffect(() => {
-        if (currentLocation) setSelectedLocation(currentLocation);
-    }, [currentLocation]);
+        goToCurrentLocation();
+    }, [goToCurrentLocation]);
 
     useEffect(() => {
         if (selectedMapArea) {
@@ -88,31 +101,11 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
         [events, onEventsClick]
     );
 
-    const goToLocation = useCallback(
-        (coord: Coordinates) => {
-            map.panTo({ lat: coord.latitude, lng: coord.longitude });
-        },
-        [map]
-    );
-
-    const handleSearchPlaceChange = useCallback(
-        (coord: Coordinates) => {
-            goToLocation(coord);
-            map.setZoom(12);
-        },
-        [map, goToLocation]
-    );
-
-    const handleCurrentLocationClick = useCallback(() => {
-        updateCurrentLocation();
-        if (currentLocation) setSelectedLocation(currentLocation);
-    }, [currentLocation, updateCurrentLocation]);
-
     return (
         <MapContext.Provider value={{ map, isLoaded }}>
             <EventsMapView
                 isLoaded={isLoaded}
-                center={selectedLocation}
+                center={DEFAULT_LOCATION}
                 onLoad={loadMap}
                 onUnmount={unloadMap}
                 events={events}
@@ -123,8 +116,8 @@ export const EventsMapContainer: EventsMapContainerComponent = ({
                 selectedMapArea={selectedMapArea}
                 showSelectedArea={showSelectedArea}
                 onMapClick={() => setShowSelectedArea(false)}
-                onSearchPlaceChange={handleSearchPlaceChange}
-                onCurrentLocationClick={handleCurrentLocationClick}
+                onSearchPlaceChange={goToLocation}
+                onCurrentLocationClick={goToCurrentLocation}
             />
         </MapContext.Provider>
     );
