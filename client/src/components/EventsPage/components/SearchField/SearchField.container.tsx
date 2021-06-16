@@ -21,6 +21,8 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
 }) => {
     const [place, setPlace] = useState<Place>();
     const [predictions, setPredictions] = useState<Prediction[]>([]);
+    const [value, setValue] = useState('');
+    const [open, setOpen] = useState(false);
 
     const debouncedGetQueryPredictions = useMemo(() => {
         return debounce(
@@ -29,8 +31,19 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
         );
     }, [AutoCompleteService]);
 
+    const handleOpen = useCallback(() => {
+        setOpen(true);
+    }, [setOpen]);
+
+    const handleClose = useCallback(() => {
+        setOpen(false);
+    }, [setOpen]);
+
     const handleInputChange = useCallback(
         (input) => {
+            setValue(input);
+            console.log(input);
+
             if (input?.length) {
                 debouncedGetQueryPredictions(
                     {
@@ -57,7 +70,6 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
 
     const handlePlaceSelect = useCallback(
         (value: Prediction | string) => {
-            if (!value) return;
             const prediction = isPrediction(value) ? value : predictions[0];
             if (prediction) {
                 const { placeId } = prediction;
@@ -73,6 +85,27 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
         [setPlace, predictions, PlacesService]
     );
 
+    const handleEnterKeyPress = useCallback(
+        (e: React.KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === 'Enter') {
+                const prediction = predictions[0];
+                if (prediction) {
+                    const { placeId, name } = prediction;
+                    setValue(name);
+                    handleClose();
+                    PlacesService.getDetails(
+                        {
+                            placeId,
+                            fields
+                        },
+                        setPlace
+                    );
+                }
+            }
+        },
+        [PlacesService, handleClose, predictions]
+    );
+
     useEffect(() => {
         if (place) {
             const {
@@ -85,9 +118,14 @@ export const SearchFieldContainer: SearchFieldContainerComponent = ({
 
     return (
         <SearchFieldView
+            value={value}
             options={predictions}
             onChange={handlePlaceSelect}
             onInputChange={handleInputChange}
+            onKeyPress={handleEnterKeyPress}
+            open={open}
+            onOpen={handleOpen}
+            onClose={handleClose}
         />
     );
 };

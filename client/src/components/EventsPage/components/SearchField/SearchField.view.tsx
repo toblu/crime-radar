@@ -24,9 +24,14 @@ const useStyles = makeStyles({
 });
 
 export const SearchFieldView: SearchFieldViewComponent = ({
+    open,
+    value,
+    onOpen,
+    onClose,
     onInputChange,
     onChange,
-    options
+    options,
+    onKeyPress
 }) => {
     const classes = useStyles();
     const [renderBackdrop, setRenderBackdrop] = useState(false);
@@ -35,7 +40,11 @@ export const SearchFieldView: SearchFieldViewComponent = ({
             <Paper className={classes.root}>
                 <Autocomplete
                     id="place-search-field"
+                    open={open}
+                    inputValue={value}
                     options={options}
+                    onOpen={onOpen}
+                    onClose={onClose}
                     onInputChange={(_, value) => onInputChange(value)}
                     onChange={(_, v) => onChange(v)}
                     getOptionLabel={(option) => option.name}
@@ -50,6 +59,7 @@ export const SearchFieldView: SearchFieldViewComponent = ({
                             placeholder="Sök plats"
                         />
                     )}
+                    onKeyPress={onKeyPress}
                 />
             </Paper>
             {renderBackdrop && <div className={classes.backdrop} />}

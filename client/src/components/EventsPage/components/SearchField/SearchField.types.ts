@@ -18,9 +18,14 @@ export type Prediction = {
 };
 
 export type SearchFieldViewProps = {
+    value: string;
     options: Prediction[];
+    open: boolean;
+    onOpen: () => void;
+    onClose: () => void;
     onChange: (value: Prediction | string) => void;
     onInputChange: (value: string) => void;
+    onKeyPress: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 type SearchFieldContainerProps = {
     onChange: (coord: Coordinates) => void;
