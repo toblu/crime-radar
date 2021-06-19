@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { EventsPage } from '../EventsPage';
 import { LoginForm } from '../LoginForm';
 import { SignupForm } from '../SignupForm';
@@ -8,7 +8,7 @@ import { RoutesView } from './Routes.view';
 
 export const RoutesContainer = () => (
     <RoutesView>
-        <Route path="/" exact>
+        <Route path={'/events'}>
             <EventsPage />
         </Route>
         <Route path="/login">
@@ -20,5 +20,6 @@ export const RoutesContainer = () => (
         <PrivateRoute path="/profile" fallbackRoute="/">
             <div>Profile page</div>
         </PrivateRoute>
+        <Redirect from="/" to="/events" exact />
     </RoutesView>
 );

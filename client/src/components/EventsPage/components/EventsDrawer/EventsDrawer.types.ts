@@ -1,13 +1,13 @@
 import { Event } from '../../../shared/types/event.types';
 
 type EventsDrawerContainerProps = {
+    allEvents: Event[];
+};
+type EventsDrawerViewProps = {
+    events: Event[];
     open: boolean;
     onClose: () => void;
     onOpen: () => void;
-    events: Event[];
-    active: boolean;
-};
-type EventsDrawerViewProps = EventsDrawerContainerProps & {
     selectedEventId: string | null;
     onEventClick: (id: string) => void;
     onEventDetailsClose: () => void;

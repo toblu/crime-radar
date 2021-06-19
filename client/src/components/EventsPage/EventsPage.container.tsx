@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { constants } from '@crime-alert/shared';
 import { IEventType } from '@crime-alert/shared/dist/constants';
 import { useEvents } from '../shared/hooks';
-import { Event } from '../shared/types/event.types';
 import { EventFilter, EventsMap } from './components';
 import { TimePeriod } from './components/EventFilter/EventFilter.types';
 import { EventsDrawer } from './components/EventsDrawer';
@@ -10,9 +10,10 @@ import { LAST_7_DAYS } from './components/TimeRangeFilter/TimeRangeFilter.consta
 import { EventsPageView } from './EventsPage.view';
 
 export const EventsPageContainer = () => {
-    const [eventsInSelectedArea, setEventsInSelectedArea] = useState<Event[]>(
-        []
-    );
+    const { path } = useRouteMatch();
+    const isEventsDrawerRoute = useRouteMatch([`${path}/:ids`]);
+    const history = useHistory();
+
     const [timePeriod, setTimePeriod] = useState<TimePeriod>(LAST_7_DAYS);
     const [eventTypes, setEventTypes] = useState<IEventType[]>(
         constants.eventTypes
@@ -22,13 +23,17 @@ export const EventsPageContainer = () => {
         to: timePeriod.to,
         type: eventTypes.length ? (eventTypes as IEventType[]) : undefined
     });
-    const [showSidebar, setShowSidebar] = useState(false);
+
     const [showSelectedArea, setShowSelectedArea] = useState(false);
 
-    const handleEventsClick = useCallback((events) => {
-        setEventsInSelectedArea(events);
-        setShowSidebar(true);
-    }, []);
+    const handleEventsClick = useCallback(
+        (events) => {
+            history.push(
+                `${path}/${events.map(({ remoteId }) => remoteId).join(',')}`
+            );
+        },
+        [history, path]
+    );
 
     const handleFilterChange = useCallback<
         (timePeriod: TimePeriod, eventTypes: IEventType[]) => void
@@ -38,9 +43,20 @@ export const EventsPageContainer = () => {
     }, []);
 
     useEffect(() => {
-        setEventsInSelectedArea([]);
         setShowSelectedArea(false);
     }, [events]);
+
+    useEffect(() => {
+        if (!showSelectedArea) {
+            history.push('/events');
+        }
+    }, [history, showSelectedArea]);
+
+    useEffect(() => {
+        if (!isEventsDrawerRoute) {
+            setShowSelectedArea(false);
+        }
+    }, [isEventsDrawerRoute]);
 
     return (
         <EventsPageView>
@@ -56,13 +72,9 @@ export const EventsPageContainer = () => {
                 showSelectedArea={showSelectedArea}
                 setShowSelectedArea={setShowSelectedArea}
             />
-            <EventsDrawer
-                open={showSelectedArea && showSidebar}
-                onClose={() => setShowSidebar(false)}
-                onOpen={() => setShowSidebar(true)}
-                events={eventsInSelectedArea}
-                active={showSelectedArea}
-            />
+            <Route path={`${path}/:ids/:details?/:id?`}>
+                <EventsDrawer allEvents={events} />
+            </Route>
         </EventsPageView>
     );
 };

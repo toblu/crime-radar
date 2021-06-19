@@ -27,7 +27,7 @@ const basePaperStyles = (isMobile: boolean): CSSProperties => ({
 });
 
 const useDrawerStyles = (isMobile: boolean) =>
-    makeStyles((theme) => ({
+    makeStyles(() => ({
         root: {
             flexShrink: 0
         },
@@ -42,7 +42,7 @@ const useDrawerStyles = (isMobile: boolean) =>
         }
     }))();
 
-const useToggleButtonStyles = ({ open, show, isMobile }) =>
+const useToggleButtonStyles = ({ open, isMobile }) =>
     makeStyles((theme) => ({
         root: {
             position: 'absolute',
@@ -53,7 +53,6 @@ const useToggleButtonStyles = ({ open, show, isMobile }) =>
                 (48 - isMobile ? mobileAppBarHeight : desktopAppBarHeight) / 2
             }px)`,
             borderRadius: 'unset',
-            display: show ? 'block' : 'none',
             transition: theme.transitions.create('right', {
                 easing: theme.transitions.easing.easeOut,
                 duration: open
@@ -69,16 +68,14 @@ const useToggleButtonStyles = ({ open, show, isMobile }) =>
     }))();
 const ToggleDrawerButton = ({
     onClick,
-    open,
-    show
+    open
 }: {
     onClick: () => void;
     open: boolean;
-    show: boolean;
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const classes = useToggleButtonStyles({ open, show, isMobile });
+    const classes = useToggleButtonStyles({ open, isMobile });
     return (
         <IconButton classes={classes} onClick={onClick} size="small">
             {open ? <ArrowRightIcon /> : <ArrowLeftIcon />}
@@ -87,7 +84,6 @@ const ToggleDrawerButton = ({
 };
 
 export const EventsDrawerView: EventsDrawerViewComponent = ({
-    active,
     open,
     onClose,
     onOpen,
@@ -111,7 +107,6 @@ export const EventsDrawerView: EventsDrawerViewComponent = ({
                         onOpen();
                     }
                 }}
-                show={active}
             />
 
             <Drawer

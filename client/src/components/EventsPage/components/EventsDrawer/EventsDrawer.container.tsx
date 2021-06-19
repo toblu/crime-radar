@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
 import { EventsDrawerContainerComponent } from './EventsDrawer.types';
 import { EventsDrawerView } from './EventsDrawer.view';
 
 export const EventsDrawerContainer: EventsDrawerContainerComponent = ({
-    open,
-    onClose,
-    onOpen,
-    events,
-    active
+    allEvents
 }) => {
-    const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+    const history = useHistory();
+    const { id: selectedEventId, ids: eventIdsParam } = useParams<{
+        id: string;
+        ids: string;
+    }>();
+    const { url } = useRouteMatch();
+    const [open, setOpen] = useState(true);
 
-    useEffect(() => {
-        if (!open) {
-            setSelectedEventId(null);
-        }
-    }, [open]);
+    const parsedEventIds = eventIdsParam.split(',');
+    const selectedEvents = allEvents.filter(({ remoteId }) =>
+        parsedEventIds.includes(remoteId)
+    );
 
     return (
         <EventsDrawerView
             open={open}
-            onClose={onClose}
-            onOpen={onOpen}
-            events={events}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+            events={selectedEvents}
             selectedEventId={selectedEventId}
-            onEventClick={setSelectedEventId}
-            onEventDetailsClose={() => setSelectedEventId(null)}
-            active={active}
+            onEventClick={(id) => history.push(`${url}/details/${id}`)}
+            onEventDetailsClose={history.goBack}
         />
     );
 };
