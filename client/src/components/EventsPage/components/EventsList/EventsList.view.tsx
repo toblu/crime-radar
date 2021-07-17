@@ -15,7 +15,7 @@ export const EventsListView: EventsListViewComponent = ({
                     id={event.remoteId}
                     type={event.type}
                     location={event.location.name}
-                    datetime={event.datetime}
+                    eventTime={event.name.split(',')[0]}
                     showDivider={i !== events.length - 1}
                     onClick={() => onEventClick(event.remoteId)}
                 />

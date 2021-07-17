@@ -4,6 +4,7 @@ export const GET_EVENT = gql`
     query GetEvent($id: String!) {
         event(id: $id) {
             type
+            name
             summary
             content
             url

@@ -4,7 +4,7 @@ type EventListItemViewProps = {
     id: Event['remoteId'];
     type: Event['type'];
     location: string;
-    datetime: Event['datetime'];
+    eventTime: string;
     onClick: () => void;
     showDivider: boolean;
 };

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { format } from 'date-fns/esm';
 import { Divider, IconButton, makeStyles, Typography } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -79,7 +78,9 @@ export const EventDetailsView: EventDetailsViewComponent = ({
 
     if (loading || !event) return null;
 
-    const { type, datetime, location, summary, content, url } = event;
+    const { type, location, name, summary, content, url } = event;
+
+    const eventTime = name.split(',')[0];
 
     return (
         !loading && (
@@ -92,13 +93,7 @@ export const EventDetailsView: EventDetailsViewComponent = ({
                 </div>
                 <div className={classes.contentBody}>
                     <ContentRow title="Typ av händelse:" text={type} />
-                    <ContentRow
-                        title="Tid för händelsen"
-                        text={format(
-                            new Date(parseInt(datetime, 10)),
-                            'yyyy-MM-dd HH:mm'
-                        )}
-                    />
+                    <ContentRow title="Tid för händelsen" text={eventTime} />
                     <ContentRow title="Plats:" text={location.name} />
                     <ContentRow
                         title="Beskrivning av händelse:"

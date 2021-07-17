@@ -18,6 +18,7 @@ export const GET_EVENTS = gql`
             remoteId
             type
             summary
+            name
             url
             datetime
             location {
