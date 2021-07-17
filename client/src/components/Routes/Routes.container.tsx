@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { AboutPage } from '../AboutPage';
 import { EventsPage } from '../EventsPage';
 import { LoginForm } from '../LoginForm';
 import { SignupForm } from '../SignupForm';
@@ -16,6 +17,9 @@ export const RoutesContainer = () => (
         </Route>
         <Route path="/signup">
             <SignupForm />
+        </Route>
+        <Route path="/about">
+            <AboutPage />
         </Route>
         <PrivateRoute path="/profile" fallbackRoute="/">
             <div>Profile page</div>
