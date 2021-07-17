@@ -22,7 +22,7 @@ functions:
         handler: src/handler.run
         timeout: 120
         events:
-            - schedule: rate(1 hour)
+            - schedule: rate(30 minutes)
             - http: GET /
 
 custom:
