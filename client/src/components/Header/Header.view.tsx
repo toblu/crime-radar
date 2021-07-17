@@ -1,16 +1,9 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-    AppBar,
-    Toolbar,
-    Theme,
-    Link,
-    makeStyles,
-    IconButton
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Theme, Link, makeStyles } from '@material-ui/core';
 import { HeaderComponent } from './Header.types';
 import { Logo } from './components/Logo';
+import { MainMenu } from './components/MainMenu';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -35,9 +28,7 @@ export const HeaderView: HeaderComponent = () => {
         <div className={classes.root}>
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
+                    <MainMenu />
                     <Link
                         component={RouterLink}
                         className={classes.title}
