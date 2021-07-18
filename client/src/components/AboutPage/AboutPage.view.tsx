@@ -4,19 +4,20 @@ import { Logo } from './components';
 
 const styles = (theme: Theme) => ({
     root: {
-        padding: `0 ${theme.spacing(4)}px`
+        overflowY: 'scroll' as 'scroll',
+        padding: theme.spacing(2)
     },
     section: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(3)
     },
     title: {
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4)
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2)
     },
     logoList: {
-        width: '100%;',
-        maxWidth: 1600,
         display: 'inline-flex',
+        width: '100%',
+        maxWidth: 1600,
         justifyContent: 'space-between',
         flexWrap: 'wrap' as 'wrap'
     }
@@ -44,8 +45,8 @@ export const AboutPageView = () => {
             <div className={classes.section}>
                 <Typography variant="body1">
                     Crime Radar är en webbapplikation som visar brott och andra
-                    polishändelser över hela Sverige med en interaktiv karta.
-                    All data är hämtad från Polisens&nbsp;
+                    polishändelser över hela Sverige på en interaktiv karta. All
+                    data är hämtad från Polisens&nbsp;
                     <a href="https://polisen.se/kontakt/om-webbplatsen/oppna-data/api-over-polisens-handelser/">
                         öppna API
                     </a>
@@ -71,11 +72,12 @@ export const AboutPageView = () => {
                     interaktiv karta och vilket gör det mer intuitivt och
                     lättöverskådligt för användaren.
                 </Typography>
-                <br />
+            </div>
+            <div className={classes.section}>
                 <Typography variant="h6">Platsen för händelser</Typography>
                 <Typography variant="body1">
                     Platsen som visas på kartan för en händelse baseras på den
-                    platsinformation som finns i polisens API. Denna plats anger
+                    platsinformation som finns i Polisens API. Denna plats anger
                     inte exakt var en händelse har skett, utan visar endast
                     mittpunkten för den kommun som händelsen har inträffat i.
                 </Typography>
@@ -90,23 +92,23 @@ export const AboutPageView = () => {
                         <Logo key={technology} logo={technology} />
                     ))}
                 </div>
-                <br />
+            </div>
+            <div className={classes.section}>
                 <Typography variant="body2">
                     All kod finns tillgänglig på&nbsp;
                     <a href="https://github.com/toblu/crime-alert">Github</a>
                 </Typography>
-                <br />
-                <div>
-                    <Typography variant="h6">Skapare</Typography>
-                    <Typography variant="body1">
-                        Crime Radar skapades som ett hobbyprojekt av&nbsp;
-                        <a href="https://www.linkedin.com/in/tobiaslundell/">
-                            Tobias Lundell
-                        </a>
-                        . Till vardags jobbar Tobias som IT-konsult inom
-                        webbutveckling.
-                    </Typography>
-                </div>
+            </div>
+            <div className={classes.section}>
+                <Typography variant="h6">Skapare</Typography>
+                <Typography variant="body1">
+                    Crime Radar skapades som ett hobbyprojekt av&nbsp;
+                    <a href="https://www.linkedin.com/in/tobiaslundell/">
+                        Tobias Lundell
+                    </a>
+                    . Till vardags jobbar Tobias som IT-konsult inom
+                    webbutveckling.
+                </Typography>
             </div>
         </div>
     );
