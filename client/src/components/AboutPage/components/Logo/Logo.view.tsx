@@ -19,23 +19,28 @@ const useStyles = makeStyles(styles);
 const imgProps = {
     react: {
         src: ReactLogo,
+        title: 'React',
         alt: 'React'
     },
     node: {
         src: NodejsLogo,
+        title: 'NodeJS',
         alt: 'NodeJS'
     },
-    apollo: { src: ApolloLogo, alt: 'Apollo' },
+    apollo: { src: ApolloLogo, title: 'Apollo', alt: 'Apollo' },
     aws: {
         src: AwsLogo,
+        title: 'AWS',
         alt: 'AWS'
     },
     graphql: {
         src: GraphqlLogo,
+        title: 'GraphQL',
         alt: 'GraphQL'
     },
     mongodb: {
         src: MongodbLogo,
+        title: 'MongoDB',
         alt: 'MongoDB'
     }
 };
