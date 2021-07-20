@@ -1,4 +1,4 @@
-import { IEvent } from '../models/event';
+import { IEvent } from '../interfaces';
 import { isBetween } from './isBetween';
 import { parseCoordinates } from './parseCoordinates';
 

@@ -1,11 +1,6 @@
 import bcrypt from 'bcrypt-nodejs';
 import mongoose, { Document } from 'mongoose';
-
-export type IUser = {
-    id: string;
-    email: string;
-    password: string;
-};
+import { IUser } from '../interfaces';
 
 type ComparePasswordFn = (
     candidatePassword: string,

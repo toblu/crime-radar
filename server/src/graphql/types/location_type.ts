@@ -1,4 +1,4 @@
-import { IEvent } from '@crime-alert/shared/dist/models/event';
+import { IEvent } from '@crime-alert/shared';
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { AuthContext } from '../../services/auth/auth.types';
 

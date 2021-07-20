@@ -1,4 +1,4 @@
-import { IUser } from '@crime-alert/shared/dist/models/user';
+import { IUser } from '@crime-alert/shared';
 import { GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
 import { AuthContext } from '../../services/auth/auth.types';
 

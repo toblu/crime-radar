@@ -1,22 +1,7 @@
 import mongoose from 'mongoose';
-import { IEventType } from '../constants';
+import { IEvent } from '../interfaces';
 
 const Schema = mongoose.Schema;
-
-export type IEvent = {
-    id: string;
-    remoteId: string;
-    datetime: Date;
-    name: string;
-    summary: string;
-    content: string;
-    url: string;
-    type: IEventType;
-    location: {
-        name: string;
-        gps: string;
-    };
-};
 
 export type EventDocument = mongoose.Document & IEvent;
 

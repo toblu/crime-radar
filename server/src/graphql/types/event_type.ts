@@ -1,6 +1,6 @@
 import { AuthContext } from '../../services/auth/auth.types';
 import { GraphQLObjectType, GraphQLString } from 'graphql';
-import { IEvent } from '@crime-alert/shared/dist/models/event';
+import { IEvent } from '@crime-alert/shared';
 import LocationType from './location_type';
 
 const EventType = new GraphQLObjectType<IEvent, AuthContext>({

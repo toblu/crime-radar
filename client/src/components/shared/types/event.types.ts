@@ -1,4 +1,4 @@
-import { IEvent } from '@crime-alert/shared/src/models/event';
+import { IEvent } from '@crime-alert/shared';
 
 export type Event = Pick<
     IEvent,

@@ -6,7 +6,7 @@ import {
     eventQuery
 } from './../queries';
 import { AuthContext } from '../../services/auth/auth.types';
-import { IUser } from '@crime-alert/shared/dist/models/user';
+import { IUser } from '@crime-alert/shared';
 
 const RootQueryType = new GraphQLObjectType<
     Omit<IUser, 'password'>,

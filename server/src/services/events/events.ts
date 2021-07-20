@@ -1,7 +1,7 @@
 import { FilterQuery } from 'mongoose';
-import { EventModel } from '@crime-alert/shared';
+import { EventModel, IEvent } from '@crime-alert/shared';
 import { IEventType } from '@crime-alert/shared/dist/constants';
-import { EventDocument, IEvent } from '@crime-alert/shared/dist/models/event';
+import { EventDocument } from '@crime-alert/shared/dist/models/event';
 
 type Params = {
     limit?: number;
