@@ -1,10 +1,13 @@
 import React, { useCallback } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 
+const libraries = ['places'];
+
 export const useLoadMap = () => {
     const { isLoaded } = useJsApiLoader({
         language: 'se',
-        libraries: ['places'],
+        // @ts-ignore
+        libraries,
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!
     });
 
