@@ -35,7 +35,10 @@ app.get('/', async function (req, res) {
         }
     });
 
-    const events: Omit<IEvent, 'remoteId'>[] = await response.json();
+    const events: Omit<IEvent, 'remoteId'>[] = (await response.json()).slice(
+        0,
+        100
+    );
 
     let eventsAdded = 0;
     let eventsUpdated = 0;
