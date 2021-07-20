@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
     ApolloClient,
     ApolloProvider,
@@ -24,6 +25,17 @@ const client = new ApolloClient({
 function App() {
     return (
         <div className="App">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Crime Radar</title>
+                <link rel="canonical" href="http://crimeradar.se/events" />
+                <meta
+                    name="description"
+                    content="Se de senaste händelserna från Polisen i ditt område. Crime
+                    Radar visar brott och andra händelser från Polisen på en
+                    interaktiv karta över hela Sverige."
+                />
+            </Helmet>
             <ApolloProvider client={client}>
                 <Router>
                     <Header />

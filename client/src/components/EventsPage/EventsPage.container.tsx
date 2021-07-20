@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Route, useHistory, useRouteMatch } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { constants } from '@crime-alert/shared';
 import { IEventType } from '@crime-alert/shared/dist/constants';
 import { useEvents } from '../shared/hooks';
@@ -59,22 +60,27 @@ export const EventsPageContainer = () => {
     }, [isEventsDrawerRoute]);
 
     return (
-        <EventsPageView>
-            <EventFilter
-                timePeriod={timePeriod}
-                eventTypes={eventTypes}
-                onChange={handleFilterChange}
-            />
-            <EventsMap
-                eventsLoading={loading}
-                events={events}
-                onEventsClick={handleEventsClick}
-                showSelectedArea={showSelectedArea}
-                setShowSelectedArea={setShowSelectedArea}
-            />
-            <Route path={`${path}/:ids/:details?/:id?`}>
-                <EventsDrawer allEvents={events} />
-            </Route>
-        </EventsPageView>
+        <>
+            <Helmet>
+                <title>Senaste händelser | Crime Radar</title>
+            </Helmet>
+            <EventsPageView>
+                <EventFilter
+                    timePeriod={timePeriod}
+                    eventTypes={eventTypes}
+                    onChange={handleFilterChange}
+                />
+                <EventsMap
+                    eventsLoading={loading}
+                    events={events}
+                    onEventsClick={handleEventsClick}
+                    showSelectedArea={showSelectedArea}
+                    setShowSelectedArea={setShowSelectedArea}
+                />
+                <Route path={`${path}/:ids/:details?/:id?`}>
+                    <EventsDrawer allEvents={events} />
+                </Route>
+            </EventsPageView>
+        </>
     );
 };
