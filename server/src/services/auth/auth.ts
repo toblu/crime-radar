@@ -1,7 +1,8 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
+import { IUser } from '@crime-alert/shared';
 import { AuthContext } from './auth.types';
-import { UserModel, IUser } from '@crime-alert/shared';
+import { UserModel } from './models';
 
 // SerializeUser is used to provide some identifying token that can be saved
 // in the users session.  We traditionally use the 'ID' for this.

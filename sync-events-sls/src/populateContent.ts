@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { EventModel, IEvent } from '@crime-alert/shared';
+import { IEvent } from '@crime-alert/shared';
+import EventModel from './event.model';
 import { fetchEventContent } from './fetchEventContent';
 
 const {

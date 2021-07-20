@@ -1,7 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { EventModel, IEvent } from '@crime-alert/shared';
+import { IEvent } from '@crime-alert/shared';
 import fetch from 'node-fetch';
+import EventModel from './event.model';
 import { fetchEventContent } from './fetchEventContent';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

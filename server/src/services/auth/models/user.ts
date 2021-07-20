@@ -1,6 +1,6 @@
+import { IUser } from '@crime-alert/shared';
 import bcrypt from 'bcrypt-nodejs';
 import mongoose, { Document } from 'mongoose';
-import { IUser } from '../interfaces';
 
 type ComparePasswordFn = (
     candidatePassword: string,

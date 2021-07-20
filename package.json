@@ -14,7 +14,9 @@
         "build:server": "cd server && yarn build",
         "build": "yarn build:shared && concurrently \"yarn build:client\" \"yarn build:server\"",
         "start:server": "cd server && yarn start",
-        "heroku-postbuild": "yarn build:shared && yarn build:server"
+        "heroku-postbuild": "yarn build:shared && yarn build:server",
+        "deploy:server": "cd server && yarn deploy:prod",
+        "deploy:sls": "cd sync-events-sls && yarn sls:deploy"
     },
     "author": "Tobias Lundell",
     "license": "ISC",

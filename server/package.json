@@ -27,7 +27,8 @@
         "build": "tsc --build && cp \"./package.json\" ./dist/",
         "start": "node dist/index.js",
         "dev": "nodemon --watch src -e ts  --exec \"yarn build && yarn start\"",
-        "lint": "eslint src/**/*.ts"
+        "lint": "eslint src/**/*.ts",
+        "deploy:prod": "git push heroku master"
     },
     "devDependencies": {
         "@types/bcrypt-nodejs": "^0.0.31",

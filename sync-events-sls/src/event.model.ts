@@ -1,5 +1,5 @@
+import { IEvent } from '@crime-alert/shared';
 import mongoose from 'mongoose';
-import { IEvent } from '../interfaces';
 
 const Schema = mongoose.Schema;
 
