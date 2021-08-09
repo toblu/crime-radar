@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { AboutPage } from '../AboutPage';
 import { EventsPage } from '../EventsPage';
 import { LoginForm } from '../LoginForm';
@@ -10,9 +10,6 @@ import { RoutesView } from './Routes.view';
 export const RoutesContainer = () => (
     <RoutesView>
         <Switch>
-            <Route path="/events">
-                <EventsPage />
-            </Route>
             <Route path="/login">
                 <LoginForm />
             </Route>
@@ -25,7 +22,9 @@ export const RoutesContainer = () => (
             <PrivateRoute path="/profile" fallbackRoute="/">
                 <div>Profile page</div>
             </PrivateRoute>
-            <Redirect from="*" to="/events" />
+            <Route path="/">
+                <EventsPage />
+            </Route>
         </Switch>
     </RoutesView>
 );

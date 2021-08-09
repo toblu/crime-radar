@@ -11,8 +11,7 @@ import { LAST_7_DAYS } from './components/TimeRangeFilter/TimeRangeFilter.consta
 import { EventsPageView } from './EventsPage.view';
 
 export const EventsPageContainer = () => {
-    const { path } = useRouteMatch();
-    const isEventsDrawerRoute = useRouteMatch([`${path}/:ids`]);
+    const isEventsDrawerRoute = useRouteMatch([`/:ids`]);
     const history = useHistory();
 
     const [timePeriod, setTimePeriod] = useState<TimePeriod>(LAST_7_DAYS);
@@ -30,10 +29,10 @@ export const EventsPageContainer = () => {
     const handleEventsClick = useCallback(
         (events) => {
             history.push(
-                `${path}/${events.map(({ remoteId }) => remoteId).join(',')}`
+                `/${events.map(({ remoteId }) => remoteId).join(',')}`
             );
         },
-        [history, path]
+        [history]
     );
 
     const handleFilterChange = useCallback<
@@ -49,7 +48,7 @@ export const EventsPageContainer = () => {
 
     useEffect(() => {
         if (!showSelectedArea) {
-            history.push('/events');
+            history.push('/');
         }
     }, [history, showSelectedArea]);
 
@@ -77,7 +76,7 @@ export const EventsPageContainer = () => {
                     showSelectedArea={showSelectedArea}
                     setShowSelectedArea={setShowSelectedArea}
                 />
-                <Route path={`${path}/:ids/:details?/:id?`}>
+                <Route path="/:ids/:details?/:id?">
                     <EventsDrawer allEvents={events} />
                 </Route>
             </EventsPageView>

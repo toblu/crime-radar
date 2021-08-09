@@ -28,7 +28,7 @@ function App() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Crime Radar</title>
-                <link rel="canonical" href="http://crimeradar.se/events" />
+                <link rel="canonical" href="http://crimeradar.se" />
                 <meta
                     name="description"
                     content="Se de senaste händelserna från Polisen i ditt område. Crime
