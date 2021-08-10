@@ -3,6 +3,8 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![Netlify Status][netlify-shield]][netlify-url]
+[![Heroku Status][heroku-shield]][heroku-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -106,3 +108,7 @@ Project Link: [https://github.com/toblu/crime-radar](https://github.com/toblu/cr
 [license-url]: https://github.com/toblu/crime-radar/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/tobiaslundell
+[netlify-shield]: https://api.netlify.com/api/v1/badges/084a29c6-0125-422b-89de-b170d2dd6b33/deploy-status
+[netlify-url]: https://app.netlify.com/sites/focused-spence-b6d911/deploys
+[heroku-shield]: https://heroku-status-badges.herokuapp.com/crime-alert-server
+[heroku-url]: https://dashboard.heroku.com/apps/crime-alert-server/activity
