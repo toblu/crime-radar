@@ -51,6 +51,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', (req, res) => {
+    res.status(200).send('Crime Radar');
+});
+
 // Instruct Express to pass on any request made to the '/graphql' route
 // to the GraphQL instance.
 app.use(
