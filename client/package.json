@@ -32,7 +32,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "eslint src/**/*.ts{,x}"
+        "lint": "eslint src/**/*.ts{,x}",
+        "serve": "serve -s build"
     },
     "browserslist": {
         "production": [
@@ -53,6 +54,7 @@
         "@types/react": "^16.9.0",
         "@types/react-dom": "^16.9.0",
         "@types/react-router-dom": "^5.1.5",
-        "eslint-config-react-app": "^5.2.1"
+        "eslint-config-react-app": "^5.2.1",
+        "serve": "^12.0.1"
     }
 }
