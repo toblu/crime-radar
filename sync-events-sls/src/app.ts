@@ -37,7 +37,7 @@ app.get('/', async function (req, res) {
 
     const events: Omit<IEvent, 'remoteId'>[] = (await response.json()).slice(
         0,
-        100
+        75
     );
 
     let eventsAdded = 0;

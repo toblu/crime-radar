@@ -14,7 +14,6 @@ plugins:
 provider:
     name: aws
     runtime: nodejs12.x
-    profile: crime-alert
     region: eu-north-1
 
 functions:
@@ -22,7 +21,7 @@ functions:
         handler: src/handler.run
         timeout: 120
         events:
-            - schedule: rate(30 minutes)
+            - schedule: rate(15 minutes)
             - http: GET /
 
 custom:
